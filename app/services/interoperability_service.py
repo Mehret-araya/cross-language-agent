@@ -2,6 +2,7 @@
 import json
 
 from app.integrations.json_adapter import handle_json_request
+from app.integrations.java_bridge import run_java_billing_example
 from app.models import PackageInfo
 from app.agents.analyzer import analyze_packages
 from app.agents.strategy import recommend_strategy
@@ -22,12 +23,13 @@ def run_adapter_example(a: int, b: int) -> dict:
 def run_interoperability_workflow(
     source: PackageInfo,
     target: PackageInfo,
+    execute_example: bool = False,
 ) -> dict:
     analysis = analyze_packages(source, target)
     strategy = recommend_strategy(source, target)
     plan = create_adapter_plan(source, target, strategy)
 
-    return {
+    result = {
         "analysis": {
             "compatible": analysis.compatible,
             "risks": analysis.risks,
@@ -47,3 +49,11 @@ def run_interoperability_workflow(
             "test_requirements": plan.test_requirements,
         },
     }
+
+    if execute_example:
+        result["execution_example"] = run_java_billing_example(
+            unit_price="20.00",
+            quantity=3,
+        )
+
+    return result
