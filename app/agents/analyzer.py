@@ -13,7 +13,10 @@ def analyze_packages(
         f"Target: {target.name} ({target.language})",
     ]
 
-    if source.language.lower() != target.language.lower():
+    source_language = source.language.strip().lower()
+    target_language = target.language.strip().lower()
+
+    if source_language != target_language:
         risks.append(
             "Cross-language boundary needs an interoperability strategy."
         )
@@ -23,6 +26,21 @@ def analyze_packages(
 
     if not target.exports:
         risks.append("Target package exports need documentation.")
+
+    if source.exports and target.exports:
+        source_exports = {name.strip() for name in source.exports}
+        target_exports = {name.strip() for name in target.exports}
+        shared_exports = source_exports & target_exports
+
+        if shared_exports:
+            evidence.append(
+                "Exports with matching names: "
+                + ", ".join(sorted(shared_exports))
+            )
+        else:
+            risks.append(
+                "No matching export names found; map the APIs explicitly."
+            )
 
     return AnalysisResult(
         compatible=not risks,
