@@ -1,4 +1,3 @@
-
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -22,7 +21,8 @@ def test_execute_billing_example_endpoint():
     assert data["result"]["unit_price"] == "20.00"
     assert data["result"]["quantity"] == 3
     assert data["result"]["total"] == "60.00"
-    
+
+
 def test_analyze_with_execution_endpoint():
     response = client.post(
         "/analyze-with-execution",
@@ -54,3 +54,32 @@ def test_analyze_with_execution_endpoint():
     assert data["execution_example"]["ok"] is True
     assert data["execution_example"]["result"]["total"] == "60.00"
 
+
+def test_execute_billing_example_rejects_invalid_price():
+    response = client.post(
+        "/execute-billing-example",
+        json={
+            "unit_price": "abc",
+            "quantity": 3,
+        },
+    )
+
+    assert response.status_code == 200
+    data = response.json()
+    assert data["ok"] is False
+    assert data["error"] == "Unit price must be a valid number."
+
+
+def test_execute_billing_example_rejects_negative_quantity():
+    response = client.post(
+        "/execute-billing-example",
+        json={
+            "unit_price": "12.50",
+            "quantity": -1,
+        },
+    )
+
+    assert response.status_code == 200
+    data = response.json()
+    assert data["ok"] is False
+    assert data["error"] == "Quantity cannot be negative."
