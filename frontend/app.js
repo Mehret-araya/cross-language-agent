@@ -30,6 +30,34 @@ function packageFromForm(formData, prefix) {
   };
 }
 
+function formatErrorDetail(detail) {
+  if (typeof detail === "string") {
+    return detail;
+  }
+  if (!Array.isArray(detail)) {
+    return null;
+  }
+
+  const messages = detail.map((item) => {
+    if (typeof item === "string") {
+      return item;
+    }
+    if (!item || typeof item !== "object") {
+      return "";
+    }
+
+    const message = typeof item.msg === "string"
+      ? item.msg
+      : "Invalid request.";
+    const location = Array.isArray(item.loc)
+      ? item.loc.filter((part) => part !== "body").join(".")
+      : "";
+    return location ? `${location}: ${message}` : message;
+  }).filter(Boolean);
+
+  return messages.length ? messages.join("; ") : null;
+}
+
 async function postJson(path, data) {
   const response = await fetch(path, {
     method: "POST",
@@ -39,7 +67,8 @@ async function postJson(path, data) {
   const payload = await response.json();
 
   if (!response.ok) {
-    throw new Error(payload.detail || `Request failed (${response.status}).`);
+    const detail = formatErrorDetail(payload.detail);
+    throw new Error(detail || `Request failed (${response.status}).`);
   }
   return payload;
 }
