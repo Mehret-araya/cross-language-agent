@@ -1809,6 +1809,11 @@ h1 {
   color: var(--text-secondary);
 }
 
+.showcase-copy .eyebrow,
+.showcase-copy > p:not(.eyebrow) {
+  color: #0a0a0a;
+}
+
 .workflow-tab {
   color: var(--text-secondary);
   font-size: 0.875rem;
