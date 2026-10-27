@@ -15,8 +15,8 @@ def recommend_strategy(
     source: PackageInfo,
     target: PackageInfo,
 ) -> StrategyResult:
-    source_language = source.language.lower()
-    target_language = target.language.lower()
+    source_language = source.language.strip().casefold()
+    target_language = target.language.strip().casefold()
 
     if source_language == target_language:
         return StrategyResult(

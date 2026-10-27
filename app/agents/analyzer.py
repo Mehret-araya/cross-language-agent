@@ -13,23 +13,24 @@ def analyze_packages(
         f"Target: {target.name} ({target.language})",
     ]
 
-    source_language = source.language.strip().lower()
-    target_language = target.language.strip().lower()
+    source_language = source.language.strip().casefold()
+    target_language = target.language.strip().casefold()
 
     if source_language != target_language:
         risks.append(
             "Cross-language boundary needs an interoperability strategy."
         )
 
-    if not source.exports:
+    source_exports = {name.strip() for name in source.exports if name.strip()}
+    target_exports = {name.strip() for name in target.exports if name.strip()}
+
+    if not source_exports:
         risks.append("Source package exports need documentation.")
 
-    if not target.exports:
+    if not target_exports:
         risks.append("Target package exports need documentation.")
 
-    if source.exports and target.exports:
-        source_exports = {name.strip() for name in source.exports}
-        target_exports = {name.strip() for name in target.exports}
+    if source_exports and target_exports:
         shared_exports = source_exports & target_exports
         if shared_exports:
             evidence.append(

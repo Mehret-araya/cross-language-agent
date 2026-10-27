@@ -64,10 +64,7 @@ def test_execute_billing_example_rejects_invalid_price():
         },
     )
 
-    assert response.status_code == 200
-    data = response.json()
-    assert data["ok"] is False
-    assert data["error"] == "Unit price must be a valid number."
+    assert response.status_code == 422
 
 
 def test_execute_billing_example_rejects_negative_quantity():
@@ -79,7 +76,26 @@ def test_execute_billing_example_rejects_negative_quantity():
         },
     )
 
-    assert response.status_code == 200
-    data = response.json()
-    assert data["ok"] is False
-    assert data["error"] == "Quantity cannot be negative."
+    assert response.status_code == 422
+
+
+def test_execute_billing_example_rejects_boolean_quantity():
+    response = client.post(
+        "/execute-billing-example",
+        json={"unit_price": "12.50", "quantity": True},
+    )
+
+    assert response.status_code == 422
+
+
+def test_execute_billing_example_rejects_unknown_fields():
+    response = client.post(
+        "/execute-billing-example",
+        json={
+            "unit_price": "12.50",
+            "quantity": 3,
+            "unexpected": True,
+        },
+    )
+
+    assert response.status_code == 422
