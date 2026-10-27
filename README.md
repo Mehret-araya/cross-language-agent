@@ -307,6 +307,13 @@ execution bridge. The frontend is plain JavaScript; check its syntax with:
 node --check frontend\app.js
 ```
 
+## Demonstration
+
+See [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md) for a timed live walkthrough,
+startup and health-check commands, the expected billing response, and
+presentation questions. No screenshots are committed; the guide demonstrates
+the application using the live local interface and API.
+
 ## Security considerations
 
 This is a local demonstration, not a hardened public service. The API has no
