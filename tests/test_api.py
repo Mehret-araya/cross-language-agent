@@ -50,11 +50,57 @@ def test_analyze_endpoint_returns_workflow_result():
     assert response.status_code == 200
 
     data = response.json()
-    assert "analysis" in data
-    assert "strategy" in data
-    assert "adapter_plan" in data
-    assert data["strategy"]["name"]
-    assert data["adapter_plan"]["steps"]
+    assert data["analysis"]["compatible"] is False
+    assert "No matching export names" in data["analysis"]["risks"][1]
+    assert data["strategy"]["name"] == "rest_api"
+    assert data["adapter_plan"]["strategy"] == "rest_api"
+    assert len(data["adapter_plan"]["steps"]) == 4
+    assert len(data["adapter_plan"]["test_requirements"]) == 3
+
+
+def test_analyze_normalizes_language_and_export_names():
+    response = client.post(
+        "/analyze",
+        json={
+            "source": {
+                "name": "source",
+                "language": " PYTHON ",
+                "exports": [" calculate_total "],
+            },
+            "target": {
+                "name": "target",
+                "language": "python",
+                "exports": ["calculate_total"],
+            },
+        },
+    )
+
+    assert response.status_code == 200
+    data = response.json()
+    assert data["strategy"]["name"] == "direct_import"
+    assert "Exports with matching names: calculate_total" in (
+        data["analysis"]["evidence"]
+    )
+    assert any(
+        "do not prove API compatibility" in risk
+        for risk in data["analysis"]["risks"]
+    )
+
+
+def test_analyze_rejects_more_than_100_exports():
+    response = client.post(
+        "/analyze",
+        json={
+            "source": {
+                "name": "source",
+                "language": "Python",
+                "exports": [f"export_{index}" for index in range(101)],
+            },
+            "target": {"name": "target", "language": "Java"},
+        },
+    )
+
+    assert response.status_code == 422
 
 
 def test_analyze_rejects_blank_package_metadata():
