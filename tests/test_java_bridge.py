@@ -1,3 +1,4 @@
+import json
 import os
 import subprocess
 from pathlib import Path
@@ -101,6 +102,19 @@ def test_compile_bridge_reports_timeout(monkeypatch, tmp_path):
         ("[]", "returned an invalid response"),
         ('{"ok": false}', "unspecified failure"),
         ('{"ok": false, "error": "worker failed"}', "worker failed"),
+        ('{"ok": true}', "invalid billing result"),
+        ('{"ok": true, "result": null}', "invalid billing result"),
+        ('{"ok": true, "result": []}', "invalid billing result"),
+        ('{"ok": true, "result": {"unit_price": "20.00", "quantity": 3}}',
+         "incomplete billing result"),
+        ('{"ok": true, "result": {"unit_price": 20, "quantity": 3, "total": "60.00"}}',
+         "incomplete billing result"),
+        ('{"ok": true, "result": {"unit_price": "20.00", "quantity": true, "total": "60.00"}}',
+         "incomplete billing result"),
+        ('{"ok": true, "result": {"unit_price": "NaN", "quantity": 3, "total": "60.00"}}',
+         "invalid billing result values"),
+        ('{"ok": true, "result": {"unit_price": "20.00", "quantity": 3, "total": "invalid"}}',
+         "invalid billing result values"),
     ],
 )
 def test_run_java_billing_example_rejects_invalid_worker_responses(
@@ -123,6 +137,31 @@ def test_run_java_billing_example_rejects_invalid_worker_responses(
 
     with pytest.raises(java_bridge.JavaBridgeError, match=message):
         java_bridge.run_java_billing_example("20.00", 3)
+
+
+def test_run_java_billing_example_accepts_valid_worker_response(monkeypatch):
+    response = {
+        "ok": True,
+        "result": {
+            "unit_price": "20.00",
+            "quantity": 3,
+            "total": "60.00",
+        },
+    }
+    monkeypatch.setattr(java_bridge, "_find_executable", lambda name: "java")
+    monkeypatch.setattr(java_bridge, "_compile_bridge", lambda *args: None)
+    monkeypatch.setattr(
+        java_bridge.subprocess,
+        "run",
+        lambda *args, **kwargs: subprocess.CompletedProcess(
+            args=args,
+            returncode=0,
+            stdout=f"{json.dumps(response)}\n",
+            stderr="",
+        ),
+    )
+
+    assert java_bridge.run_java_billing_example("20.00", 3) == response
 
 
 def test_run_java_billing_example_reports_missing_runtime(monkeypatch):

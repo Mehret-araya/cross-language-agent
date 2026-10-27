@@ -3,6 +3,7 @@ import os
 import shutil
 import subprocess
 import sys
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 
@@ -142,4 +143,36 @@ def run_java_billing_example(
         if not isinstance(error, str) or not error:
             raise JavaBridgeError("Java bridge reported an unspecified failure.")
         raise JavaBridgeError(f"Java billing example failed: {error}")
+
+    billing_result = response.get("result")
+    if not isinstance(billing_result, dict):
+        raise JavaBridgeError("Java bridge returned an invalid billing result.")
+
+    unit_price = billing_result.get("unit_price")
+    quantity = billing_result.get("quantity")
+    total = billing_result.get("total")
+    if (
+        not isinstance(unit_price, str)
+        or not isinstance(quantity, int)
+        or isinstance(quantity, bool)
+        or not isinstance(total, str)
+    ):
+        raise JavaBridgeError("Java bridge returned an incomplete billing result.")
+
+    try:
+        price_value = Decimal(unit_price)
+        total_value = Decimal(total)
+    except InvalidOperation as exc:
+        raise JavaBridgeError(
+            "Java bridge returned invalid billing result values."
+        ) from exc
+    if (
+        not price_value.is_finite()
+        or price_value < 0
+        or not total_value.is_finite()
+        or total_value < 0
+        or quantity < 0
+    ):
+        raise JavaBridgeError("Java bridge returned invalid billing result values.")
+
     return response
