@@ -4,6 +4,15 @@ const requestStatus = document.querySelector("#request-status");
 const results = document.querySelector("#results");
 const healthStatus = document.querySelector("#health-status");
 const executeBilling = document.querySelector("#execute-billing");
+const billingInputs = form.querySelectorAll(
+  '[name="unit-price"], [name="quantity"]',
+);
+
+function syncBillingInputs() {
+  for (const input of billingInputs) {
+    input.disabled = !executeBilling.checked;
+  }
+}
 
 function packageFromForm(formData, prefix) {
   const exports = formData
@@ -222,4 +231,6 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
+executeBilling.addEventListener("change", syncBillingInputs);
+syncBillingInputs();
 checkHealth();
