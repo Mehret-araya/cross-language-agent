@@ -1,7 +1,7 @@
 
 from decimal import Decimal, InvalidOperation
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from app.models import PackageInfo
@@ -11,9 +11,24 @@ from app.controllers.analysis_controller import (
 from app.services.interoperability_service import (
     run_interoperability_workflow,
 )
-from app.integrations.java_bridge import run_java_billing_example
+from app.integrations.java_bridge import (
+    JavaBridgeError,
+    JavaBridgeTimeout,
+    JavaToolchainUnavailable,
+    run_java_billing_example,
+)
 
 router = APIRouter()
+
+
+def _raise_bridge_http_error(exc: JavaBridgeError) -> None:
+    if isinstance(exc, JavaToolchainUnavailable):
+        status_code = 503
+    elif isinstance(exc, JavaBridgeTimeout):
+        status_code = 504
+    else:
+        status_code = 502
+    raise HTTPException(status_code=status_code, detail=str(exc)) from exc
 
 
 class BillingRequest(BaseModel):
@@ -58,16 +73,22 @@ def analyze_packages_endpoint(request: AnalysisRequest) -> dict:
 
 @router.post("/execute-billing-example")
 def execute_billing_example(request: BillingRequest) -> dict:
-    return run_java_billing_example(
-        unit_price=request.unit_price,
-        quantity=request.quantity,
-    )
+    try:
+        return run_java_billing_example(
+            unit_price=request.unit_price,
+            quantity=request.quantity,
+        )
+    except JavaBridgeError as exc:
+        _raise_bridge_http_error(exc)
 
 
 @router.post("/analyze-with-execution")
 def analyze_with_execution(request: WorkflowRequest) -> dict:
-    return run_interoperability_workflow(
-        source=request.source,
-        target=request.target,
-        execute_example=request.execute_example,
-    )
+    try:
+        return run_interoperability_workflow(
+            source=request.source,
+            target=request.target,
+            execute_example=request.execute_example,
+        )
+    except JavaBridgeError as exc:
+        _raise_bridge_http_error(exc)

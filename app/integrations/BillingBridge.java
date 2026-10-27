@@ -8,9 +8,9 @@ import java.nio.charset.StandardCharsets;
 
 public class BillingBridge {
     public static void main(String[] args) throws Exception {
-        // Find the project folder and Python virtual environment.
+        // Use the Python interpreter selected by the caller when available.
         String projectDir = System.getProperty("user.dir");
-        String python = projectDir + "\\.venv\\Scripts\\python.exe";
+        String python = args.length > 0 ? args[0] : "python";
 
         // Start the Python worker.
         ProcessBuilder builder = new ProcessBuilder(
