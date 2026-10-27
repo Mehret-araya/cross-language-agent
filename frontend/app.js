@@ -4,6 +4,8 @@ const requestStatus = document.querySelector("#request-status");
 const results = document.querySelector("#results");
 const healthStatus = document.querySelector("#health-status");
 const executeBilling = document.querySelector("#execute-billing");
+const menuToggle = document.querySelector("#menu-toggle");
+const siteNav = document.querySelector("#site-nav");
 const billingInputs = form.querySelectorAll(
   '[name="unit-price"], [name="quantity"]',
 );
@@ -262,4 +264,31 @@ form.addEventListener("submit", async (event) => {
 
 executeBilling.addEventListener("change", syncBillingInputs);
 syncBillingInputs();
+
+function setNavigationOpen(isOpen) {
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+  menuToggle.setAttribute(
+    "aria-label",
+    isOpen ? "Close navigation" : "Open navigation",
+  );
+  siteNav.classList.toggle("is-open", isOpen);
+}
+
+menuToggle.addEventListener("click", () => {
+  const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+  setNavigationOpen(!isOpen);
+});
+
+siteNav.addEventListener("click", (event) => {
+  if (event.target.closest("a")) {
+    setNavigationOpen(false);
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    setNavigationOpen(false);
+  }
+});
+
 checkHealth();

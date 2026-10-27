@@ -3,144 +3,340 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#101820">
-    <title>Cross-Language Interoperability Agent</title>
+    <meta name="theme-color" content="#f8f8f6">
+    <meta name="description"
+          content="Explore package interoperability with metadata analysis, integration strategies, adapter planning, and a Java-to-Python billing demo.">
+    <title>Cross-Language Package Interoperability Agent</title>
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/app.js" defer></script>
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="/" aria-label="Cross-Language Agent home">
-        <span class="brand-mark" aria-hidden="true">↔</span>
-        <span>Interoperability Agent</span>
-      </a>
-      <span class="health" id="health-status" role="status">Checking API…</span>
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="Cross-Language Agent home">
+          <span class="brand-mark" aria-hidden="true">↔</span>
+          <span>Cross-Language Agent</span>
+        </a>
+        <button class="menu-toggle" id="menu-toggle" type="button"
+                aria-label="Open navigation" aria-controls="site-nav"
+                aria-expanded="false">
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+          <a href="#workbench">Workbench</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#bridge">Java bridge</a>
+          <a href="/docs">API docs</a>
+        </nav>
+        <div class="header-actions">
+          <span class="health" id="health-status" role="status">Checking API…</span>
+          <a class="button button-dark button-small" href="#workbench">Start analysis</a>
+        </div>
+      </div>
     </header>
 
     <main>
-      <section class="intro">
-        <p class="eyebrow">PACKAGE COMPATIBILITY WORKBENCH</p>
-        <h1>Make the boundary between packages clear.</h1>
-        <p class="intro-copy">
-          Compare package exports, get a practical integration strategy, and
-          generate an adapter plan from the live API.
-        </p>
-      </section>
-
-      <form id="analysis-form" novalidate>
-        <div class="package-grid">
-          <fieldset class="package-card">
-            <legend>Source package</legend>
-            <label>
-              Package name
-              <input name="source-name" required maxlength="128"
-                     placeholder="billing-python" value="billing-python">
-            </label>
-            <div class="field-row">
-              <label>
-                Language
-                <input name="source-language" required maxlength="64"
-                       placeholder="Python" value="Python">
-              </label>
-              <label>
-                Version
-                <input name="source-version" maxlength="128"
-                       placeholder="1.0">
-              </label>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div>
+            <p class="eyebrow">PACKAGE INTEROPERABILITY WORKBENCH</p>
+            <h1 id="hero-title">Make package boundaries work across languages.</h1>
+          </div>
+          <div class="hero-aside">
+            <p>
+              Compare declared exports, explore a practical integration
+              strategy, and map the work an adapter still needs.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-dark" href="#workbench">Analyze packages</a>
+              <a class="button button-outline" href="/docs">Explore the API</a>
             </div>
-            <label>
-              Runtime
-              <input name="source-runtime" maxlength="128"
-                     placeholder="Python 3.12">
-            </label>
-            <label>
-              Public exports
-              <textarea name="source-exports" rows="3"
-                        placeholder="One export per line">calculate_total</textarea>
-              <span class="hint">Separate names with commas or new lines.</span>
-            </label>
-          </fieldset>
-
-          <fieldset class="package-card">
-            <legend>Target package</legend>
-            <label>
-              Package name
-              <input name="target-name" required maxlength="128"
-                     placeholder="billing-java" value="billing-java">
-            </label>
-            <div class="field-row">
-              <label>
-                Language
-                <input name="target-language" required maxlength="64"
-                       placeholder="Java" value="Java">
-              </label>
-              <label>
-                Version
-                <input name="target-version" maxlength="128"
-                       placeholder="1.0">
-              </label>
-            </div>
-            <label>
-              Runtime
-              <input name="target-runtime" maxlength="128"
-                     placeholder="JVM">
-            </label>
-            <label>
-              Public exports
-              <textarea name="target-exports" rows="3"
-                        placeholder="One export per line">calculateTotal</textarea>
-              <span class="hint">Separate names with commas or new lines.</span>
-            </label>
-          </fieldset>
+          </div>
         </div>
 
-        <section class="execution-card" aria-labelledby="execution-title">
-          <div class="execution-heading">
-            <div>
-              <p class="eyebrow">OPTIONAL LIVE CHECK</p>
-              <h2 id="execution-title">Run the billing example</h2>
+        <section class="workbench-panel" id="workbench"
+                 aria-labelledby="workbench-title">
+          <div class="panel-glow" aria-hidden="true"></div>
+          <div class="workbench-top">
+            <div class="workflow-tabs" aria-label="Analysis workflow">
+              <a class="workflow-tab active" href="#package-input">Package inputs</a>
+              <a class="workflow-tab" href="#workflow">Strategy &amp; plan</a>
+              <a class="workflow-tab" href="#bridge">Runtime example</a>
             </div>
-            <label class="toggle-label" for="execute-billing">
-              <input id="execute-billing" name="execute-billing" type="checkbox">
-              Execute after analysis
-            </label>
+            <span class="panel-badge"><span class="status-dot"></span> Live API</span>
           </div>
-          <div class="field-row billing-fields">
-            <label>
-              Unit price
-              <input name="unit-price" inputmode="decimal" value="20.00"
-                     maxlength="32" required disabled>
-            </label>
-            <label>
-              Quantity
-              <input name="quantity" type="number" min="0" step="1" value="3"
-                     required disabled>
-            </label>
+
+          <div class="workbench-heading" id="package-input">
+            <div>
+              <p class="eyebrow">START WITH THE INTERFACE</p>
+              <h2 id="workbench-title">Compare two packages</h2>
+            </div>
+            <p>Metadata only. No package source code is inspected or executed.</p>
           </div>
-          <p class="hint">
-            This calls the Java bridge and the billing worker; a local JDK is
-            required.
-          </p>
+
+          <form id="analysis-form" novalidate>
+            <div class="package-grid">
+              <fieldset class="package-card source-card">
+                <legend><span class="package-index">01</span> Source package</legend>
+                <label>
+                  Package name
+                  <input name="source-name" required maxlength="128"
+                         placeholder="billing-python" value="billing-python">
+                </label>
+                <div class="field-row">
+                  <label>
+                    Language
+                    <input name="source-language" required maxlength="64"
+                           placeholder="Python" value="Python">
+                  </label>
+                  <label>
+                    Version
+                    <input name="source-version" maxlength="128"
+                           placeholder="1.0">
+                  </label>
+                </div>
+                <label>
+                  Runtime
+                  <input name="source-runtime" maxlength="128"
+                         placeholder="Python 3.12">
+                </label>
+                <label>
+                  Public exports
+                  <textarea name="source-exports" rows="3"
+                            placeholder="One export per line">calculate_total</textarea>
+                  <span class="hint">Separate names with commas or new lines.</span>
+                </label>
+              </fieldset>
+
+              <fieldset class="package-card target-card">
+                <legend><span class="package-index">02</span> Target package</legend>
+                <label>
+                  Package name
+                  <input name="target-name" required maxlength="128"
+                         placeholder="billing-java" value="billing-java">
+                </label>
+                <div class="field-row">
+                  <label>
+                    Language
+                    <input name="target-language" required maxlength="64"
+                           placeholder="Java" value="Java">
+                  </label>
+                  <label>
+                    Version
+                    <input name="target-version" maxlength="128"
+                           placeholder="1.0">
+                  </label>
+                </div>
+                <label>
+                  Runtime
+                  <input name="target-runtime" maxlength="128"
+                         placeholder="JVM">
+                </label>
+                <label>
+                  Public exports
+                  <textarea name="target-exports" rows="3"
+                            placeholder="One export per line">calculateTotal</textarea>
+                  <span class="hint">Names are compared as metadata, not signatures.</span>
+                </label>
+              </fieldset>
+            </div>
+
+            <section class="execution-card" aria-labelledby="execution-title">
+              <div class="execution-heading">
+                <div class="execution-title">
+                  <span class="execution-icon" aria-hidden="true">↗</span>
+                  <div>
+                    <p class="eyebrow">OPTIONAL LIVE CHECK</p>
+                    <h3 id="execution-title">Run the Java-to-Python billing example</h3>
+                  </div>
+                </div>
+                <label class="toggle-label" for="execute-billing">
+                  <input id="execute-billing" name="execute-billing"
+                         type="checkbox">
+                  Execute after analysis
+                </label>
+              </div>
+              <div class="field-row billing-fields">
+                <label>
+                  Unit price
+                  <input name="unit-price" inputmode="decimal" value="20.00"
+                         maxlength="32" required disabled>
+                </label>
+                <label>
+                  Quantity
+                  <input name="quantity" type="number" min="0" step="1"
+                         value="3" required disabled>
+                </label>
+              </div>
+              <p class="hint">
+                This starts a local Java bridge and Python worker. A JDK is
+                required to compile and run the bridge.
+              </p>
+            </section>
+
+            <div class="form-actions">
+              <p class="hint">
+                Matching export names are a starting point, not proof of
+                compatibility.
+              </p>
+              <button class="button button-dark analyze-button"
+                      id="analyze-button" type="submit">
+                <span>Analyze packages</span>
+                <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </form>
         </section>
 
-        <div class="form-actions">
-          <p class="hint">Matching names are only a starting point, not proof of compatibility.</p>
-          <button id="analyze-button" type="submit">
-            <span>Analyze packages</span>
-            <span aria-hidden="true">→</span>
-          </button>
-        </div>
-      </form>
+        <p class="request-status" id="request-status" role="status"
+           aria-live="polite"></p>
+        <section class="results" id="results" aria-label="Analysis results"
+                 hidden></section>
+      </section>
 
-      <p class="request-status" id="request-status" role="status"
-         aria-live="polite"></p>
-      <section class="results" id="results" aria-label="Analysis results"
-               hidden></section>
+      <section class="workflow-section section-space" id="workflow"
+               aria-labelledby="workflow-title">
+        <div class="trust-label">A PRACTICAL PATH FROM METADATA TO INTEGRATION</div>
+        <div class="workflow-strip" aria-label="Workflow stages">
+          <div class="workflow-step"><span>01</span><strong>Describe</strong><small>Package metadata</small></div>
+          <span class="step-connector" aria-hidden="true"></span>
+          <div class="workflow-step"><span>02</span><strong>Compare</strong><small>Exports &amp; risks</small></div>
+          <span class="step-connector" aria-hidden="true"></span>
+          <div class="workflow-step"><span>03</span><strong>Plan</strong><small>Strategy &amp; tests</small></div>
+          <span class="step-connector" aria-hidden="true"></span>
+          <div class="workflow-step"><span>04</span><strong>Exercise</strong><small>Optional runtime demo</small></div>
+        </div>
+
+        <div class="section-heading centered">
+          <p class="eyebrow">TWO COMPLEMENTARY SYSTEMS</p>
+          <h2 id="workflow-title">One clear view of the boundary.</h2>
+          <p>
+            Keep static package analysis separate from a real process-level
+            billing example.
+          </p>
+        </div>
+        <div class="systems-grid">
+          <article class="system-card analysis-system">
+            <span class="system-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 3.75h7l4 4v12.5H7a2 2 0 0 1-2-2v-12.5a2 2 0 0 1 2-2Z"/>
+                <path d="M14 4v4h4M8.5 12h7M8.5 15.5h7"/>
+              </svg>
+            </span>
+            <div>
+              <p class="card-kicker">METADATA ANALYSIS</p>
+              <h3>Understand what’s declared.</h3>
+              <p>Review export-name evidence, surfaced risks, and a deterministic strategy suggestion.</p>
+            </div>
+            <span class="system-caption">Analysis is guidance, not a compatibility guarantee.</span>
+          </article>
+          <article class="system-card runtime-system" id="bridge">
+            <span class="system-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 7.5h6v9H4zM14 7.5h6v9h-6zM10 12h4"/>
+                <path d="m12 9.5 2.5 2.5-2.5 2.5"/>
+              </svg>
+            </span>
+            <div>
+              <p class="card-kicker">JAVA ↔ PYTHON</p>
+              <h3>Exercise one real boundary.</h3>
+              <p>Pass JSON across local processes and calculate a billing total using Python Decimal.</p>
+            </div>
+            <span class="system-caption">Demo input: 20.00 × 3 <b>→ 60.00</b></span>
+          </article>
+        </div>
+      </section>
+
+      <section class="bridge-showcase section-space" aria-labelledby="showcase-title">
+        <div class="showcase-wash" aria-hidden="true"></div>
+        <div class="showcase-copy">
+          <p class="eyebrow">A SMALL, REAL INTEGRATION</p>
+          <h2 id="showcase-title">Metadata advice. Runtime proof of the demo.</h2>
+          <p>
+            The analyzer works from package descriptions. Separately, the
+            optional billing path really launches Java and a Python worker.
+          </p>
+          <a class="button button-light" href="#workbench">Try the billing example</a>
+        </div>
+        <article class="bridge-glass" aria-label="Java and Python bridge flow">
+          <div class="glass-header">
+            <div>
+              <p class="glass-kicker">PROCESS BRIDGE</p>
+              <h3>JSON request / response</h3>
+            </div>
+            <span class="glass-badge"><span class="status-dot"></span> Local demo</span>
+          </div>
+          <div class="bridge-flow">
+            <div class="bridge-node"><span class="node-symbol">J</span><strong>Java</strong><small>Bridge process</small></div>
+            <span class="flow-line" aria-hidden="true"><i></i></span>
+            <div class="json-node">{ }</div>
+            <span class="flow-line" aria-hidden="true"><i></i></span>
+            <div class="bridge-node python-node"><span class="node-symbol">Py</span><strong>Python</strong><small>Decimal worker</small></div>
+          </div>
+          <div class="glass-result">
+            <span>Example billing result</span>
+            <strong>20.00 <small>× 3 =</small> 60.00</strong>
+          </div>
+          <p class="glass-note">This demonstrates the bridge only; submitted package metadata is not executed.</p>
+        </article>
+      </section>
+
+      <section class="planning-section section-space" aria-labelledby="planning-title">
+        <div class="planning-heading">
+          <div>
+            <span class="section-pill">IMPLEMENTATION GUIDANCE</span>
+            <h2 id="planning-title">From a recommendation to a plan.</h2>
+          </div>
+          <p>
+            Use the output to guide human implementation work. The project
+            recommends a strategy and lists steps; it does not generate adapter
+            code.
+          </p>
+        </div>
+        <div class="planning-grid">
+          <article class="planning-card plan-card-lavender">
+            <span class="plan-number">01 / STRATEGY</span>
+            <div class="plan-art strategy-art" aria-hidden="true">
+              <span class="art-orbit orbit-one"></span>
+              <span class="art-orbit orbit-two"></span>
+              <span class="art-core">API</span>
+            </div>
+            <div class="plan-copy">
+              <h3>Choose a boundary.</h3>
+              <p>Get a deterministic suggestion based on the source and target language labels.</p>
+            </div>
+          </article>
+          <article class="planning-card plan-card-mint">
+            <span class="plan-number">02 / ADAPTER CHECKLIST</span>
+            <div class="checklist-art" aria-label="Example adapter planning steps">
+              <span><i aria-hidden="true">✓</i> Inspect the public API</span>
+              <span><i aria-hidden="true">✓</i> Define the required interface</span>
+              <span><i aria-hidden="true">✓</i> Document data conversions</span>
+            </div>
+            <div class="plan-copy">
+              <h3>Know what’s next.</h3>
+              <p>Receive implementation steps and test requirements to help teams plan an adapter.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="final-cta section-space" aria-labelledby="cta-title">
+        <p class="eyebrow">START WITH YOUR PACKAGE METADATA</p>
+        <h2 id="cta-title">Build a clearer path across languages.</h2>
+        <p>Analyze a package pair, review the plan, or explore the API directly.</p>
+        <div class="hero-actions">
+          <a class="button button-dark" href="#workbench">Get started</a>
+          <a class="button button-outline" href="/docs">View API docs</a>
+        </div>
+      </section>
     </main>
 
-    <footer>
-      <span>Cross-Language Interoperability Agent</span>
-      <a href="/docs">API documentation</a>
+    <footer class="site-footer">
+      <a class="footer-brand" href="/">Cross-Language Agent</a>
+      <span>Cross-Language Interoperability Agent · Package metadata recommendations · Local Java/Python demo</span>
+      <a href="/docs">API documentation <span aria-hidden="true">↗</span></a>
     </footer>
   </body>
 </html>
