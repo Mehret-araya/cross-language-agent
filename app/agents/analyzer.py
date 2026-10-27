@@ -31,11 +31,14 @@ def analyze_packages(
         source_exports = {name.strip() for name in source.exports}
         target_exports = {name.strip() for name in target.exports}
         shared_exports = source_exports & target_exports
-
         if shared_exports:
             evidence.append(
                 "Exports with matching names: "
                 + ", ".join(sorted(shared_exports))
+            )
+            risks.append(
+                "Matching export names do not prove API compatibility; "
+                "verify signatures, data types, and behavior."
             )
         else:
             risks.append(
