@@ -1,6 +1,6 @@
 
 from fastapi import APIRouter
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from app.models import PackageInfo
 from app.controllers.analysis_controller import (
@@ -12,12 +12,9 @@ from app.services.interoperability_service import (
 from app.integrations.java_bridge import run_java_billing_example
 
 router = APIRouter()
-
-
 class BillingRequest(BaseModel):
-    unit_price: str
+    unit_price: str = Field(min_length=1)
     quantity: int
-
 
 class WorkflowRequest(BaseModel):
     source: PackageInfo
