@@ -212,9 +212,11 @@ versions.
 The analyzer compares trimmed export names and reports shared names as evidence,
 but also adds a risk stating that matching names do not prove compatibility.
 Unmatched exports are flagged for explicit mapping. Consequently, this
-metadata-only MVP does not certify a package pair as compatible; its boolean is
-a conservative signal, not a proof of runtime behavior. The adapter plan is a
-static checklist, not generated adapter code.
+metadata-only MVP does not certify a package pair as compatible. With the
+current risk rules, `analysis.compatible` remains `false` for submitted package
+pairs; interpret that as **not verified**, not proof of incompatibility or
+runtime behavior. The adapter plan is a static checklist, not generated adapter
+code.
 
 ### `POST /analyze-with-execution`
 
@@ -299,6 +301,9 @@ Run the complete Python test suite:
 .\.venv\Scripts\python.exe -m pytest
 ```
 
+The full suite includes Java bridge integration tests, so a working JDK (both
+`java` and `javac`) is required when running all tests.
+
 The suite covers validation, analysis, strategy selection, adapter planning,
 JSON handling, billing arithmetic and errors, API routes, and the Java-to-Python
 execution bridge. The frontend is plain JavaScript; check its syntax with:
@@ -306,6 +311,12 @@ execution bridge. The frontend is plain JavaScript; check its syntax with:
 ```powershell
 node --check frontend\app.js
 ```
+
+Latest local verification: **62 tests passed**; `node --check frontend\app.js`
+passed; `python -m pip check` reported no broken requirements. The live browser
+workflow was also manually exercised, including analysis, Java/Python billing,
+optional billing-form validation, and readable display of API validation
+errors. The browser check is a manual smoke test, not an automated browser test.
 
 ## Demonstration
 
