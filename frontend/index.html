@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101820">
+    <title>Cross-Language Interoperability Agent</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Cross-Language Agent home">
+        <span class="brand-mark" aria-hidden="true">↔</span>
+        <span>Interoperability Agent</span>
+      </a>
+      <span class="health" id="health-status" role="status">Checking API…</span>
+    </header>
+
+    <main>
+      <section class="intro">
+        <p class="eyebrow">PACKAGE COMPATIBILITY WORKBENCH</p>
+        <h1>Make the boundary between packages clear.</h1>
+        <p class="intro-copy">
+          Compare package exports, get a practical integration strategy, and
+          generate an adapter plan from the live API.
+        </p>
+      </section>
+
+      <form id="analysis-form" novalidate>
+        <div class="package-grid">
+          <fieldset class="package-card">
+            <legend>Source package</legend>
+            <label>
+              Package name
+              <input name="source-name" required maxlength="128"
+                     placeholder="billing-python" value="billing-python">
+            </label>
+            <div class="field-row">
+              <label>
+                Language
+                <input name="source-language" required maxlength="64"
+                       placeholder="Python" value="Python">
+              </label>
+              <label>
+                Version
+                <input name="source-version" maxlength="128"
+                       placeholder="1.0">
+              </label>
+            </div>
+            <label>
+              Runtime
+              <input name="source-runtime" maxlength="128"
+                     placeholder="Python 3.12">
+            </label>
+            <label>
+              Public exports
+              <textarea name="source-exports" rows="3"
+                        placeholder="One export per line">calculate_total</textarea>
+              <span class="hint">Separate names with commas or new lines.</span>
+            </label>
+          </fieldset>
+
+          <fieldset class="package-card">
+            <legend>Target package</legend>
+            <label>
+              Package name
+              <input name="target-name" required maxlength="128"
+                     placeholder="billing-java" value="billing-java">
+            </label>
+            <div class="field-row">
+              <label>
+                Language
+                <input name="target-language" required maxlength="64"
+                       placeholder="Java" value="Java">
+              </label>
+              <label>
+                Version
+                <input name="target-version" maxlength="128"
+                       placeholder="1.0">
+              </label>
+            </div>
+            <label>
+              Runtime
+              <input name="target-runtime" maxlength="128"
+                     placeholder="JVM">
+            </label>
+            <label>
+              Public exports
+              <textarea name="target-exports" rows="3"
+                        placeholder="One export per line">calculateTotal</textarea>
+              <span class="hint">Separate names with commas or new lines.</span>
+            </label>
+          </fieldset>
+        </div>
+
+        <section class="execution-card" aria-labelledby="execution-title">
+          <div class="execution-heading">
+            <div>
+              <p class="eyebrow">OPTIONAL LIVE CHECK</p>
+              <h2 id="execution-title">Run the billing example</h2>
+            </div>
+            <label class="toggle-label" for="execute-billing">
+              <input id="execute-billing" name="execute-billing" type="checkbox">
+              Execute after analysis
+            </label>
+          </div>
+          <div class="field-row billing-fields">
+            <label>
+              Unit price
+              <input name="unit-price" inputmode="decimal" value="20.00"
+                     maxlength="32">
+            </label>
+            <label>
+              Quantity
+              <input name="quantity" type="number" min="0" step="1" value="3">
+            </label>
+          </div>
+          <p class="hint">
+            This calls the Java bridge and the billing worker; a local JDK is
+            required.
+          </p>
+        </section>
+
+        <div class="form-actions">
+          <p class="hint">Matching names are only a starting point, not proof of compatibility.</p>
+          <button id="analyze-button" type="submit">
+            <span>Analyze packages</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </form>
+
+      <p class="request-status" id="request-status" role="status"
+         aria-live="polite"></p>
+      <section class="results" id="results" aria-label="Analysis results"
+               hidden></section>
+    </main>
+
+    <footer>
+      <span>Cross-Language Interoperability Agent</span>
+      <a href="/docs">API documentation</a>
+    </footer>
+  </body>
+</html>

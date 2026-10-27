@@ -34,9 +34,13 @@ Start the API:
 .\.venv\Scripts\python.exe -m uvicorn app.main:app --reload
 ```
 
-The service is available at `http://127.0.0.1:8000`. Interactive API
-documentation is at `http://127.0.0.1:8000/docs`; the health endpoint is
-`GET /health`.
+The web interface and service are available at `http://127.0.0.1:8000`.
+Interactive API documentation is at `http://127.0.0.1:8000/docs`; the health
+endpoint is `GET /health`.
+
+The interface submits package analysis to `POST /analyze-with-execution` and,
+when requested, billing inputs to `POST /execute-billing-example`. Both API
+calls use the same origin as the UI.
 
 ## API
 

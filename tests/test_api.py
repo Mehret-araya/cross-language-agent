@@ -13,6 +13,19 @@ def test_health_endpoint():
     assert response.json() == {"status": "ok"}
 
 
+def test_frontend_and_assets_are_served():
+    page = client.get("/")
+    script = client.get("/assets/app.js")
+    stylesheet = client.get("/assets/styles.css")
+
+    assert page.status_code == 200
+    assert "Cross-Language Interoperability Agent" in page.text
+    assert script.status_code == 200
+    assert "analyze-with-execution" in script.text
+    assert stylesheet.status_code == 200
+    assert "package-grid" in stylesheet.text
+
+
 def test_analyze_endpoint_returns_workflow_result():
     response = client.post(
         "/analyze",
