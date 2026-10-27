@@ -6,13 +6,26 @@
   background: #f8f8f6;
   color: #0a0a0a;
   --ink: #0a0a0a;
-  --muted: #6b6b6b;
+  --muted: #4a4a4a;
+  --text-secondary: #4a4a4a;
   --line: #e7e6e2;
   --paper: #fff;
   --page: #f8f8f6;
   --green: #23885f;
   --red: #a33a32;
   --soft-red: #fff0ed;
+  --font-base: 1rem;
+  --font-body: 1.0625rem;
+  --font-nav: 0.9375rem;
+  --font-brand: 1.25rem;
+  --font-button: 0.9375rem;
+  --font-section-heading: clamp(2.125rem, 5vw, 3.75rem);
+  --font-hero-heading: clamp(2.75rem, 7vw, 5.25rem);
+  --font-card-title: 1.375rem;
+  --font-card-copy: 0.9375rem;
+  --font-label: 0.8125rem;
+  --font-micro: 0.75rem;
+  --line-body: 1.6;
 }
 
 * {
@@ -1718,5 +1731,311 @@ button:disabled {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-size: var(--font-base);
+}
+
+p {
+  color: var(--text-secondary);
+  font-size: var(--font-body);
+  line-height: var(--line-body);
+}
+
+.brand {
+  font-size: var(--font-brand);
+  font-weight: 700;
+}
+
+.footer-brand {
+  font-size: var(--font-nav);
+  font-weight: 650;
+}
+
+.site-nav a {
+  color: #2a2a2a;
+  font-size: var(--font-nav);
+  font-weight: 500;
+}
+
+.site-footer > span,
+.site-footer > a:last-child,
+.section-pill {
+  color: var(--text-secondary);
+  font-size: var(--font-nav);
+}
+
+.health {
+  color: var(--text-secondary);
+  font-size: var(--font-label);
+}
+
+.button,
+.button-small {
+  min-height: 3rem;
+  padding: 0.75rem 1.5rem;
+  font-size: var(--font-button);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: var(--font-hero-heading);
+}
+
+.hero-aside > p,
+.section-heading > p:last-child,
+.planning-heading > p,
+.showcase-copy > p:not(.eyebrow),
+.final-cta > p:not(.eyebrow) {
+  color: var(--text-secondary);
+  font-size: var(--font-body);
+  line-height: var(--line-body);
+}
+
+.eyebrow,
+.card-kicker,
+.trust-label,
+.plan-number,
+.glass-kicker {
+  color: var(--text-secondary);
+  font-size: var(--font-micro);
+  letter-spacing: 0.08em;
+}
+
+.workbench-heading .eyebrow,
+.showcase-copy .eyebrow {
+  color: var(--text-secondary);
+}
+
+.workflow-tab {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.panel-badge,
+.glass-badge,
+.section-pill,
+.badge {
+  font-size: var(--font-label);
+}
+
+.workbench-heading h2,
+.section-heading h2,
+.planning-heading h2,
+.showcase-copy h2,
+.final-cta h2 {
+  font-size: var(--font-section-heading);
+}
+
+.package-card legend,
+.execution-heading h3,
+.result-title,
+.system-card h3,
+.plan-copy h3,
+.glass-header h3 {
+  font-size: var(--font-card-title);
+}
+
+.package-index,
+.bridge-node small {
+  color: var(--text-secondary);
+  font-size: var(--font-micro);
+}
+
+.workflow-step > span {
+  color: var(--text-secondary);
+}
+
+label,
+.toggle-label {
+  color: #3c3c3c;
+  font-size: var(--font-label);
+}
+
+input:not([type="checkbox"]),
+textarea {
+  font-size: var(--font-base);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #595959;
+  opacity: 1;
+}
+
+input:disabled {
+  color: #595959;
+}
+
+.hint,
+.workbench-heading > p,
+.request-status,
+.system-caption,
+.workflow-step > span,
+.workflow-step small,
+.plan-copy p,
+.result-card p,
+.result-card ul,
+.system-card > div > p:last-child,
+.site-footer > span {
+  color: var(--text-secondary);
+  font-size: var(--font-card-copy);
+}
+
+.workflow-step strong {
+  font-size: var(--font-label);
+}
+
+.execution-result span,
+.glass-note {
+  color: #4a4a4a;
+  font-size: var(--font-label);
+}
+
+.execution-result strong,
+.glass-result strong {
+  font-size: var(--font-card-title);
+  font-weight: 700;
+}
+
+.glass-result > span,
+.glass-result small {
+  color: #4a4a4a;
+  font-size: var(--font-label);
+}
+
+.hero-aside,
+.system-card,
+.result-card,
+.planning-card,
+.bridge-glass {
+  color: var(--ink);
+}
+
+.system-card .card-kicker {
+  color: var(--text-secondary);
+}
+
+.badge.review {
+  color: #674000;
+}
+
+.billing-error {
+  color: #7a211b !important;
+}
+
+:focus-visible {
+  outline: 3px solid #554275;
+  outline-offset: 3px;
+}
+
+@media (max-width: 440px) {
+  .workflow-tab {
+    font-size: var(--font-label);
+  }
+
+  .panel-badge {
+    font-size: var(--font-micro);
+  }
+}
+
+.workbench-top {
+  flex-wrap: wrap;
+}
+
+.workflow-tabs {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+@media (max-width: 900px) {
+  .header-inner {
+    position: relative;
+    gap: 12px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+    border: 1px solid #e4e3df;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 78%);
+  }
+
+  .menu-toggle span {
+    width: 14px;
+    height: 1.5px;
+    border-radius: 2px;
+    background: #111;
+    transition: transform 160ms ease;
+  }
+
+  .menu-toggle[aria-expanded="true"] span:first-child {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+
+  .menu-toggle[aria-expanded="true"] span:last-child {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
+
+  .site-nav {
+    position: absolute;
+    top: calc(100% + 1px);
+    right: 0;
+    left: 0;
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.5rem;
+    border: 1px solid #e9e8e4;
+    border-radius: 0 0 1.125rem 1.125rem;
+    background: rgb(250 250 248 / 97%);
+    box-shadow: 0 1rem 1.875rem rgb(20 20 20 / 8%);
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+  }
+
+  .site-nav.is-open {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .site-nav a {
+    padding: 0.75rem;
+    border-radius: 0.625rem;
+    color: #2a2a2a;
+    font-size: var(--font-nav);
+  }
+
+  .site-nav a:hover {
+    background: #f0efec;
+  }
+
+  .header-actions .health {
+    display: none;
+  }
+}
+
+@media (max-width: 440px) {
+  .header-actions .button-small {
+    display: none;
+  }
+
+  .workflow-step strong,
+  .workflow-step small {
+    white-space: normal;
   }
 }
