@@ -1,8 +1,89 @@
 # Cross-Language Package Interoperability Agent
 
-A FastAPI application that validates package metadata, analyzes public exports,
-recommends an interoperability strategy, creates an adapter plan, and can run a
-Python billing example through a Java-launched JSON worker.
+A small, runnable workbench for exploring interoperability between packages
+written in different programming languages. Enter package metadata in the web
+interface or call the API to receive an export-name analysis, a recommended
+integration strategy, and a checklist-style adapter plan. An optional billing
+demo exercises a real Java-to-Python process boundary.
+
+## Problem and objectives
+
+Packages implemented in different languages cannot be integrated safely by
+comparing names alone. Teams need to identify likely integration risks, choose
+a language-neutral boundary when appropriate, and specify what an adapter and
+its tests still need to cover.
+
+This project demonstrates that workflow while keeping its claims deliberately
+bounded:
+
+- Validate package metadata and surface known export-name mismatches.
+- Recommend a strategy based on the declared language labels.
+- Present implementation and test steps for a human to carry out.
+- Demonstrate a JSON request/response boundary and a Java-launched Python
+  billing worker.
+
+The analyzer does **not** inspect arbitrary package source code, compare
+function signatures or runtime behavior, prove compatibility, or generate a
+production adapter. The adapter plan is guidance, not generated integration
+code.
+
+## Features
+
+- Responsive browser interface served by the FastAPI application.
+- Input validation for package names, languages, exports, and billing values.
+- Conservative export-name analysis with explicit compatibility caveats.
+- Deterministic `direct_import` or `rest_api` strategy recommendations.
+- Adapter implementation and test checklists.
+- JSON request adapter with input and result validation.
+- Optional Java bridge that launches the active Python interpreter.
+- Billing arithmetic using Python `Decimal`.
+- Health endpoint and automatically generated OpenAPI/Swagger documentation.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    Browser[Browser UI] -->|same-origin HTTP| API[FastAPI application]
+    API --> Health[Health endpoint]
+    API --> Routes[Analysis and billing routes]
+    Routes --> Workflow[Interoperability workflow]
+    Workflow --> Analyzer[Metadata analyzer]
+    Workflow --> Strategy[Strategy selector]
+    Workflow --> Planner[Adapter-plan checklist]
+    Routes -->|optional execution| Java[Java bridge]
+    Java -->|JSON over stdin/stdout| Worker[Python adapter worker]
+    Worker --> Billing[Decimal billing function]
+    Routes -->|static assets| Browser
+```
+
+The analyzer, strategy selector, and plan builder operate on the submitted
+metadata only. Runtime execution is separate: the billing route starts Java,
+which starts the Python worker and relays one JSON request and response.
+
+## Technology stack
+
+- Python 3.10+ and Pydantic 2 for models and request validation.
+- FastAPI and Uvicorn for HTTP routes, static-file serving, and OpenAPI docs.
+- Standard-library HTML, CSS, and JavaScript for the frontend (no Node build
+  step or frontend package manager is required).
+- Java JDK for compiling and running the process bridge.
+- Pytest and FastAPI's test client for automated tests.
+
+## Repository structure
+
+```text
+app/
+  agents/          Analyzer, strategy selector, adapter-plan builder
+  api/routes/      FastAPI request models and endpoints
+  controllers/     Analysis request controller
+  integrations/    JSON adapter, billing worker, and Java bridge
+  services/        Interoperability workflow orchestration
+  main.py          FastAPI app, health route, and frontend serving
+frontend/          Browser interface (HTML, CSS, JavaScript)
+tests/             Unit, API, and Java bridge integration tests
+docs/              Demonstration and presentation guide
+requirements.txt   Python runtime and test dependencies
+```
 
 ## Requirements
 
