@@ -2359,13 +2359,6 @@ main {
 }
 
 @media (max-width: 440px) {
-  .header-actions .button-small {
-    display: inline-flex;
-    min-height: 40px;
-    padding: 8px 10px;
-    font-size: 13px;
-  }
-
   .brand {
     font-size: 13px;
   }
