@@ -1,11 +1,13 @@
 const form = document.querySelector("#analysis-form");
 const analyzeButton = document.querySelector("#analyze-button");
+const analyzeLabel = analyzeButton.querySelector("[data-label]");
 const requestStatus = document.querySelector("#request-status");
 const results = document.querySelector("#results");
 const healthStatus = document.querySelector("#health-status");
 const executeBilling = document.querySelector("#execute-billing");
 const menuToggle = document.querySelector("#menu-toggle");
 const siteNav = document.querySelector("#site-nav");
+const navigationLinks = [...siteNav.querySelectorAll('a[href^="#"]')];
 const billingInputs = form.querySelectorAll(
   '[name="unit-price"], [name="quantity"]',
 );
@@ -191,6 +193,20 @@ function renderBillingResult(response) {
   results.append(card);
 }
 
+function renderAnalysisError(error) {
+  const card = document.createElement("section");
+  card.className = "result-card wide result-error";
+  card.setAttribute("aria-label", "Analysis error");
+  const heading = document.createElement("h3");
+  heading.className = "result-title";
+  heading.textContent = "Analysis failed";
+  const message = document.createElement("p");
+  message.textContent = error.message;
+  card.append(heading, message);
+  results.replaceChildren(card);
+  results.hidden = false;
+}
+
 async function checkHealth() {
   try {
     const response = await fetch("/health");
@@ -219,6 +235,9 @@ form.addEventListener("submit", async (event) => {
   results.hidden = true;
   results.replaceChildren();
   analyzeButton.disabled = true;
+  analyzeButton.setAttribute("aria-busy", "true");
+  analyzeButton.dataset.state = "pending";
+  analyzeLabel.textContent = "Analyzing…";
 
   try {
     const analysis = await postJson("/analyze-with-execution", {
@@ -254,11 +273,17 @@ form.addEventListener("submit", async (event) => {
         requestStatus.dataset.state = "error";
       }
     }
+    analyzeButton.dataset.state =
+      requestStatus.dataset.state === "error" ? "error" : "success";
   } catch (error) {
     requestStatus.textContent = error.message;
     requestStatus.dataset.state = "error";
+    analyzeButton.dataset.state = "error";
+    renderAnalysisError(error);
   } finally {
     analyzeButton.disabled = false;
+    analyzeButton.removeAttribute("aria-busy");
+    analyzeLabel.textContent = "Analyze packages";
   }
 });
 
@@ -280,10 +305,46 @@ menuToggle.addEventListener("click", () => {
 });
 
 siteNav.addEventListener("click", (event) => {
-  if (event.target.closest("a")) {
+  const link = event.target.closest("a");
+  if (link && link.hash) {
+    setActiveNavigation(link.hash.slice(1));
+  }
+  if (link) {
     setNavigationOpen(false);
   }
 });
+
+function setActiveNavigation(sectionId) {
+  for (const link of navigationLinks) {
+    if (link.hash === `#${sectionId}`) {
+      link.setAttribute("aria-current", "location");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  }
+}
+
+if ("IntersectionObserver" in window) {
+  const navigationSections = navigationLinks
+    .map((link) => document.querySelector(link.hash))
+    .filter(Boolean);
+  const sectionObserver = new IntersectionObserver((entries) => {
+    const activeSection = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((first, second) =>
+        first.boundingClientRect.top - second.boundingClientRect.top
+      )[0];
+    if (activeSection) {
+      setActiveNavigation(activeSection.target.id);
+    }
+  }, {
+    rootMargin: "-20% 0px -65% 0px",
+    threshold: 0,
+  });
+  for (const section of navigationSections) {
+    sectionObserver.observe(section);
+  }
+}
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {

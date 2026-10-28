@@ -24,7 +24,7 @@
           <span></span>
         </button>
         <nav class="site-nav" id="site-nav" aria-label="Main navigation">
-          <a href="#workbench">Workbench</a>
+          <a href="#workbench" aria-current="location">Workbench</a>
           <a href="#workflow">Workflow</a>
           <a href="#bridge">Java bridge</a>
           <a href="/docs">API docs</a>
@@ -198,8 +198,12 @@
               </p>
               <button class="button button-dark analyze-button"
                       id="analyze-button" type="submit">
-                <span>Analyze packages</span>
-                <span aria-hidden="true">↗</span>
+                <span data-label>Analyze packages</span>
+                <svg class="analyze-icon" viewBox="0 0 24 24" fill="none"
+                     aria-hidden="true">
+                  <circle cx="10.8" cy="10.8" r="6.3"></circle>
+                  <path d="m15.4 15.4 4.1 4.1"></path>
+                </svg>
               </button>
             </div>
           </form>
