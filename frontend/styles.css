@@ -3080,3 +3080,54 @@ label {
     align-self: flex-start;
   }
 }
+
+.workflow-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: 0;
+  padding-right: 24px;
+  padding-left: 24px;
+}
+
+.workflow-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  min-width: 0;
+}
+
+.workflow-step:not(:last-child)::after {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  left: 32px;
+  height: 1px;
+  background: #cfcfca;
+  content: "";
+}
+
+.workflow-step > span {
+  position: relative;
+  z-index: 1;
+  grid-row: span 2;
+  padding-right: 8px;
+  background: var(--page);
+}
+
+.workflow-step small {
+  font-size: 15px;
+}
+
+@media (max-width: 767px) {
+  .workflow-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 12px;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .workflow-step::after {
+    display: none;
+  }
+}
