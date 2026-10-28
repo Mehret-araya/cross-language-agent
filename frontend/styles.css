@@ -22,9 +22,9 @@
   --font-section-heading: clamp(2.125rem, 5vw, 3.75rem);
   --font-hero-heading: clamp(2.75rem, 7vw, 5.25rem);
   --font-card-title: 1.375rem;
-  --font-card-copy: 0.9375rem;
-  --font-label: 0.8125rem;
-  --font-micro: 0.75rem;
+  --font-card-copy: 1rem;
+  --font-label: 0.875rem;
+  --font-micro: 0.875rem;
   --line-body: 1.6;
 }
 
@@ -275,8 +275,8 @@ h1 {
   margin: 0;
   font-size: clamp(3rem, 7.4vw, 5.375rem);
   font-weight: 650;
-  letter-spacing: -0.075em;
-  line-height: 0.98;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
 }
 
 .hero-aside {
@@ -591,7 +591,6 @@ textarea:focus-visible {
 
 .execution-heading .eyebrow {
   margin-bottom: 4px;
-  font-size: 0.75rem;
 }
 
 .execution-heading h3 {
@@ -812,7 +811,7 @@ button:disabled {
 }
 
 .workflow-step strong {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 650;
   white-space: nowrap;
 }
@@ -919,7 +918,6 @@ button:disabled {
 
 .system-card .card-kicker {
   margin-bottom: 8px;
-  font-size: 0.75rem;
 }
 
 .system-card h3 {
@@ -982,6 +980,11 @@ button:disabled {
 
 .showcase-copy {
   max-width: 450px;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background: rgb(255 255 255 / 86%);
+  box-shadow: 0 12px 32px rgb(52 37 73 / 10%);
+  backdrop-filter: blur(12px);
 }
 
 .showcase-copy .eyebrow {
@@ -1006,7 +1009,7 @@ button:disabled {
   padding: 23px;
   border: 1px solid rgb(255 255 255 / 62%);
   border-radius: 21px;
-  background: rgb(255 255 255 / 37%);
+  background: rgb(255 255 255 / 84%);
   box-shadow: 0 22px 65px rgb(52 37 73 / 13%);
   backdrop-filter: blur(20px);
 }
@@ -1065,13 +1068,13 @@ button:disabled {
 }
 
 .bridge-node strong {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 650;
 }
 
 .bridge-node small {
   color: rgb(35 34 36 / 60%);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
 }
 
 .json-node {
@@ -1134,8 +1137,8 @@ button:disabled {
 
 .glass-note {
   margin: 12px 0 0;
-  color: rgb(36 35 37 / 62%);
-  font-size: 0.75rem;
+  color: #4a4a4a;
+  font-size: 1rem;
   line-height: 1.5;
 }
 
@@ -1941,7 +1944,7 @@ textarea::placeholder {
 }
 
 .workflow-step strong {
-  font-size: var(--font-label);
+  font-size: var(--font-base);
 }
 
 .execution-result span,
@@ -2135,4 +2138,54 @@ textarea::placeholder {
     grid-auto-rows: 1fr;
     grid-template-columns: 1fr;
   }
+}
+
+.package-card {
+  min-inline-size: 0;
+  padding: 24px;
+}
+
+.package-card-title {
+  margin: 0 0 12px;
+  padding: 0 0 4px;
+}
+
+input:disabled {
+  border: 1px solid #d4d4d0;
+  background: #fff;
+  color: #1f1f1f;
+  -webkit-text-fill-color: #1f1f1f;
+  opacity: 1;
+}
+
+.planning-grid {
+  align-items: stretch;
+  grid-auto-rows: 1fr;
+}
+
+.planning-card {
+  height: 100%;
+}
+
+.plan-copy {
+  display: grid;
+  grid-template-rows: minmax(2.3em, auto) minmax(6.4em, auto);
+  margin-top: auto;
+}
+
+.checklist-art span {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.plan-copy h3 {
+  font-size: 32px;
+}
+
+.plan-copy p {
+  font-size: 18px;
+}
+
+.planning-card .art-core {
+  font-size: 14px;
 }
