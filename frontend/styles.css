@@ -2199,6 +2199,43 @@ main section,
   }
 }
 
+main {
+  padding-top: 56px;
+}
+
+.hero-copy h1 {
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.hero-copy > div:first-child > .eyebrow {
+  margin-bottom: 20px;
+  color: #2a2a2a;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.hero-aside > p {
+  max-width: 380px;
+  color: #3a3a3a;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.hero-actions .button {
+  min-height: 48px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.hero-actions .button:focus-visible {
+  outline: 2px solid #0a0a0a;
+  outline-offset: 3px;
+}
+
 @media (max-width: 440px) {
   .header-actions .button-small {
     display: none;
