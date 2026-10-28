@@ -1961,6 +1961,13 @@ input:disabled {
   letter-spacing: -0.02em;
 }
 
+.planning-card .plan-copy p {
+  max-width: 30rem;
+  color: #4a4a4a;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
 .workbench-top {
   flex-wrap: wrap;
 }
