@@ -1953,6 +1953,14 @@ input:disabled {
   letter-spacing: 0.08em;
 }
 
+.planning-card .plan-copy h3 {
+  color: #0a0a0a;
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
 .workbench-top {
   flex-wrap: wrap;
 }
