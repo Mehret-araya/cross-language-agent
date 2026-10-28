@@ -2236,6 +2236,25 @@ main {
   outline-offset: 3px;
 }
 
+.hero-copy {
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 48px;
+}
+
+.hero-aside {
+  max-width: 380px;
+  justify-self: stretch;
+  padding: 0;
+}
+
+@media (max-width: 767px) {
+  .hero-copy {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+}
+
 @media (max-width: 440px) {
   .header-actions .button-small {
     display: none;
