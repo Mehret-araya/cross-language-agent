@@ -2622,3 +2622,26 @@ label {
 .bridge-showcase .glass-note {
   margin-top: auto;
 }
+
+.bridge-showcase .showcase-copy > .eyebrow {
+  margin-bottom: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.bridge-showcase .showcase-copy h2 {
+  max-width: 100%;
+  font-size: clamp(32px, 3.6vw, 48px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.bridge-showcase .showcase-copy > p:not(.eyebrow) {
+  max-width: 440px;
+  margin: 16px 0 24px;
+  color: #3a3a3a;
+  font-size: 17px;
+  line-height: 1.6;
+}
