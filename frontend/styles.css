@@ -2110,3 +2110,13 @@ input:disabled {
     white-space: normal;
   }
 }
+
+@media (max-width: 48rem) {
+  .planning-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .planning-card .plan-copy h3 {
+    font-size: 1.625rem;
+  }
+}
