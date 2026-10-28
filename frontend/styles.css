@@ -2054,7 +2054,7 @@ textarea::placeholder {
   flex: 1 1 auto;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 767px) {
   .header-inner {
     position: relative;
     gap: 12px;
