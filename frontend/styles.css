@@ -2054,7 +2054,7 @@ textarea::placeholder {
   flex: 1 1 auto;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 850px) {
   .header-inner {
     position: relative;
     gap: 12px;
@@ -2134,7 +2134,8 @@ textarea::placeholder {
 }
 
 main section,
-#package-input {
+#package-input,
+#bridge {
   scroll-margin-top: 96px;
 }
 
@@ -2359,7 +2360,14 @@ main {
 
 @media (max-width: 440px) {
   .header-actions .button-small {
-    display: none;
+    display: inline-flex;
+    min-height: 40px;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .brand {
+    font-size: 13px;
   }
 
   .workflow-step strong,
@@ -2961,6 +2969,14 @@ label {
 
 .bridge-showcase .glass-note {
   color: #4a4a4a;
+  font-size: 14px;
+}
+
+.hero-aside > p {
+  font-size: 18px;
+}
+
+.workbench-top .panel-badge {
   font-size: 14px;
 }
 
