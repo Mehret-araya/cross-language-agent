@@ -2980,6 +2980,12 @@ label {
   font-size: 14px;
 }
 
+.workbench-top .panel-badge .status-dot {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
+}
+
 @media (max-width: 899px) {
   .bridge-showcase {
     grid-auto-rows: 1fr;
