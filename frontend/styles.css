@@ -2492,6 +2492,24 @@ label {
   content: "";
 }
 
+.menu-toggle:hover {
+  border-color: #9d9c96;
+  background: #fff;
+}
+
+.workbench-panel {
+  transition: box-shadow 150ms ease, border-color 150ms ease;
+}
+
+.workbench-panel:hover {
+  border-color: rgb(41 37 34 / 13%);
+  box-shadow: 0 16px 38px rgb(38 32 25 / 6%);
+}
+
+.workbench-panel:active {
+  border-color: rgb(41 37 34 / 18%);
+}
+
 .analyze-icon {
   width: 18px;
   height: 18px;
