@@ -317,7 +317,10 @@ siteNav.addEventListener("click", (event) => {
 
 function setActiveNavigation(sectionId) {
   for (const link of navigationLinks) {
-    if (link.hash === `#${sectionId}`) {
+    if (
+      link.hash === `#${sectionId}`
+      || (sectionId === "package-input" && link.hash === "#workbench")
+    ) {
       link.setAttribute("aria-current", "location");
     } else {
       link.removeAttribute("aria-current");
