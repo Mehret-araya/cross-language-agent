@@ -2054,7 +2054,7 @@ textarea::placeholder {
   flex: 1 1 auto;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 767px) {
   .header-inner {
     position: relative;
     gap: 12px;
@@ -2130,6 +2130,72 @@ textarea::placeholder {
 
   .header-actions .health {
     display: none;
+  }
+}
+
+main section,
+#package-input {
+  scroll-margin-top: 96px;
+}
+
+.site-header a:hover {
+  color: #0a0a0a;
+}
+
+.site-header .button-small {
+  min-height: 48px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .site-nav {
+    position: absolute;
+    top: calc(100% + 1px);
+    right: 0;
+    left: 0;
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px;
+    border: 1px solid #e9e8e4;
+    border-radius: 0 0 18px 18px;
+    background: rgb(250 250 248 / 97%);
+    box-shadow: 0 16px 30px rgb(20 20 20 / 8%);
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 150ms ease, transform 150ms ease, visibility 150ms ease;
+  }
+
+  .site-nav.is-open {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .site-nav a {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .header-actions .health {
+    display: none;
+  }
+}
+
+@media (max-width: 440px) {
+  .site-header .button-small {
+    display: inline-flex;
+    min-height: 40px;
+    padding: 8px;
+    font-size: 15px;
   }
 }
 
