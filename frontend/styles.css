@@ -2189,3 +2189,283 @@ input:disabled {
 .planning-card .art-core {
   font-size: 14px;
 }
+
+body {
+  font-size: 16px;
+}
+
+.site-nav a,
+.site-footer > span,
+.site-footer > a:last-child,
+.footer-brand,
+.button,
+.button-small,
+.workflow-tab,
+.panel-badge,
+.glass-badge,
+.section-pill,
+.badge,
+.plan-number,
+.package-index,
+.eyebrow,
+.card-kicker,
+.trust-label,
+.glass-kicker,
+.hint,
+.request-status,
+label {
+  font-size: 14px;
+}
+
+.hero-aside > p,
+.workbench-heading > p,
+.section-heading > p:last-child,
+.planning-heading > p,
+.showcase-copy > p:not(.eyebrow),
+.final-cta > p:not(.eyebrow),
+.system-card > div > p:last-child,
+.result-card p,
+.result-card ul,
+.system-caption,
+.glass-note,
+.glass-result > span,
+.glass-result small,
+.bridge-node small,
+.execution-result span,
+.toggle-helper,
+.site-footer > span {
+  font-size: 16px;
+}
+
+.hint,
+.request-status,
+.site-nav a,
+.site-footer > span,
+.site-footer > a:last-child,
+.footer-brand,
+.workflow-tab,
+.panel-badge,
+.glass-badge,
+.section-pill,
+.badge,
+.plan-number,
+.package-index,
+.eyebrow,
+.card-kicker,
+.trust-label,
+.glass-kicker,
+.system-caption,
+.bridge-node small,
+.glass-note,
+.glass-result > span,
+.glass-result small,
+.workflow-step small {
+  color: #4a4a4a;
+}
+
+.showcase-copy {
+  background: rgb(255 255 255 / 96%);
+}
+
+.bridge-glass {
+  background: rgb(255 255 255 / 96%);
+}
+
+.system-card > div > p:last-child {
+  color: #4a4a4a;
+}
+
+.workflow-step {
+  flex: 1 1 0;
+  min-width: 0;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.workflow-step strong,
+.workflow-step small {
+  white-space: normal;
+}
+
+.workflow-step > span {
+  color: #4a4a4a;
+  font-size: 20px;
+}
+
+.workflow-step strong {
+  font-size: 16px;
+}
+
+.workflow-step small {
+  font-size: 14px;
+}
+
+.step-connector {
+  width: 48px;
+  height: 2px;
+  background: #8b8b85;
+}
+
+.section-space {
+  margin-top: 96px;
+}
+
+.results[hidden] {
+  display: none;
+}
+
+.request-status:empty {
+  display: none;
+}
+
+.section-heading {
+  margin-top: 56px;
+}
+
+.planning-card .plan-art,
+.planning-card .checklist-art {
+  margin-top: 1rem;
+}
+
+.planning-card .plan-copy {
+  padding-top: 1rem;
+}
+
+.toggle-label {
+  font-size: 20px;
+}
+
+.site-footer {
+  min-height: 104px;
+  padding: 24px 0;
+}
+
+.site-footer > a:last-child {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  padding: 0 16px;
+  border: 1px solid #d4d4d0;
+  border-radius: 999px;
+  background: #fff;
+  transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
+}
+
+.site-footer > a:last-child:hover {
+  border-color: #8b8b85;
+  background: #f3f2ef;
+}
+
+.site-footer > a:last-child:active {
+  transform: scale(0.98);
+}
+
+.button,
+.menu-toggle,
+.workflow-tab,
+.package-card,
+.execution-card,
+.result-card,
+.system-card,
+.planning-card,
+.bridge-glass {
+  transition-duration: 150ms;
+}
+
+.button:active,
+.workflow-tab:active,
+.menu-toggle:active {
+  transform: scale(0.98);
+}
+
+.execution-card:hover,
+.bridge-glass:hover {
+  box-shadow: 0 13px 34px rgb(38 32 25 / 7%);
+  transform: translateY(-1px);
+}
+
+.execution-card:active,
+.package-card:active,
+.result-card:active,
+.system-card:active,
+.planning-card:active,
+.bridge-glass:active {
+  transform: translateY(0);
+}
+
+:focus-visible {
+  outline: 3px solid #0a0a0a;
+  outline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+  .section-space {
+    margin-top: 64px;
+  }
+
+  .section-heading {
+    margin-top: 44px;
+  }
+
+  .workflow-strip {
+    gap: 18px;
+  }
+
+  .step-connector {
+    display: none;
+  }
+
+  .site-footer {
+    min-height: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 28px 0;
+  }
+
+  .site-footer > span {
+    max-width: 36rem;
+  }
+
+  .site-footer > a:last-child {
+    align-self: center;
+  }
+}
+
+@media (max-width: 440px) {
+  .package-card {
+    padding: 20px;
+  }
+
+  .workbench-heading h2 {
+    font-size: clamp(1.75rem, 8vw, 2.25rem);
+  }
+
+  .section-heading h2,
+  .planning-heading h2,
+  .showcase-copy h2,
+  .final-cta h2 {
+    font-size: clamp(2rem, 9vw, 2.75rem);
+  }
+
+  .plan-copy h3 {
+    font-size: 32px;
+  }
+
+  .planning-card {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 48rem) {
+  .package-grid,
+  .systems-grid,
+  .planning-grid,
+  .results,
+  .bridge-showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .bridge-showcase {
+    gap: 24px;
+  }
+}
