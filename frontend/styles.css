@@ -393,6 +393,17 @@ h1 {
   white-space: nowrap;
 }
 
+.panel-badge {
+  min-height: 36px;
+  padding: 0 15px;
+  font-size: 16px;
+}
+
+.panel-badge .status-dot {
+  width: 9px;
+  height: 9px;
+}
+
 .workbench-heading {
   align-items: end;
   margin: 34px 0 18px;
