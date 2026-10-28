@@ -3131,3 +3131,52 @@ label {
     display: none;
   }
 }
+
+h1,
+h2,
+h3,
+.workbench-heading h2,
+.section-heading h2,
+.planning-heading h2,
+.showcase-copy h2,
+.final-cta h2,
+.system-card h3,
+.plan-copy h3,
+.glass-header h3,
+.execution-heading h3,
+.result-title {
+  letter-spacing: -0.025em;
+}
+
+.systems-grid,
+.planning-grid {
+  align-items: stretch;
+}
+
+.system-card {
+  height: 100%;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 8px 28px rgb(33 30 26 / 3%);
+}
+
+.system-card > div {
+  margin-top: 20px;
+  padding-top: 0;
+}
+
+.system-card > .system-caption {
+  margin-top: auto;
+}
+
+.planning-card .plan-art,
+.planning-card .checklist-art {
+  height: 220px;
+  min-height: 220px;
+  flex: 0 0 220px;
+  margin-top: 16px;
+}
+
+.planning-card .plan-copy {
+  margin-top: auto;
+  padding-top: 16px;
+}
