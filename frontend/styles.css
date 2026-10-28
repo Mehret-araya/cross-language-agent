@@ -2659,3 +2659,83 @@ label {
   background: #282828;
   box-shadow: 0 6px 16px rgb(0 0 0 / 18%);
 }
+
+.bridge-showcase .glass-header h3 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.bridge-showcase .glass-kicker {
+  font-size: 13px;
+}
+
+.bridge-showcase .glass-badge {
+  min-height: 32px;
+  padding: 0 12px;
+  background: #f1f1ee;
+  color: #4a4a4a;
+  font-size: 13px;
+}
+
+.bridge-showcase .glass-badge .status-dot {
+  width: 8px;
+  height: 8px;
+}
+
+.bridge-showcase .bridge-node small {
+  color: #4a4a4a;
+  font-size: 14px;
+}
+
+.bridge-showcase .node-symbol {
+  width: 48px;
+  height: 48px;
+  border-color: #d4d4d0;
+  background: #fff;
+}
+
+.bridge-showcase .bridge-flow {
+  grid-template-columns: minmax(30px, 1fr) 52px 48px 52px minmax(30px, 1fr);
+  gap: 8px;
+}
+
+.bridge-showcase .flow-line {
+  height: 2px;
+  background: #4a4a4a;
+}
+
+.bridge-showcase .flow-line i {
+  top: -3px;
+  width: 8px;
+  height: 8px;
+  border-color: #333;
+  border-width: 2px;
+}
+
+.bridge-showcase .glass-result {
+  border: 1px solid #d4d4d0;
+  background: #f4f4f1;
+}
+
+.bridge-showcase .glass-result > span,
+.bridge-showcase .glass-result small {
+  color: #4a4a4a;
+  font-size: 16px;
+}
+
+.bridge-showcase .glass-result strong {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.bridge-showcase .glass-total {
+  color: #1f1f1f;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.bridge-showcase .glass-note {
+  color: #4a4a4a;
+  font-size: 14px;
+}
