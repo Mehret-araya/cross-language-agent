@@ -1235,16 +1235,18 @@ button:disabled {
 
 .plan-copy h3 {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 620;
-  letter-spacing: -0.04em;
+  color: #0a0a0a;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .plan-copy p {
-  max-width: 430px;
+  max-width: 30rem;
   margin: 7px 0 0;
-  color: #73716d;
-  font-size: 0.75rem;
+  color: #3a3a3a;
+  font-size: 1.125rem;
   line-height: 1.6;
 }
 
@@ -1837,7 +1839,6 @@ h1 {
 .execution-heading h3,
 .result-title,
 .system-card h3,
-.plan-copy h3,
 .glass-header h3 {
   font-size: var(--font-card-title);
 }
@@ -1879,7 +1880,6 @@ input:disabled {
 .system-caption,
 .workflow-step > span,
 .workflow-step small,
-.plan-copy p,
 .result-card p,
 .result-card ul,
 .system-card > div > p:last-child,
@@ -1960,21 +1960,6 @@ input:disabled {
 
 .planning-card .plan-copy {
   padding-top: 1.5rem;
-}
-
-.planning-card .plan-copy h3 {
-  color: #0a0a0a;
-  font-size: 1.875rem;
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-}
-
-.planning-card .plan-copy p {
-  max-width: 30rem;
-  color: #4a4a4a;
-  font-size: 1.0625rem;
-  line-height: 1.6;
 }
 
 .planning-card .checklist-art {
@@ -2106,9 +2091,5 @@ input:disabled {
 @media (max-width: 48rem) {
   .planning-grid {
     grid-template-columns: 1fr;
-  }
-
-  .planning-card .plan-copy h3 {
-    font-size: 1.625rem;
   }
 }
