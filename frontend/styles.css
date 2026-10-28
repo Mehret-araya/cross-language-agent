@@ -1953,6 +1953,23 @@ input:disabled {
   letter-spacing: 0.08em;
 }
 
+.planning-card {
+  padding: 2rem;
+}
+
+.planning-card .plan-art,
+.planning-card .checklist-art {
+  margin-top: 1.5rem;
+}
+
+.planning-card .checklist-art {
+  padding: 0;
+}
+
+.planning-card .plan-copy {
+  padding-top: 1.5rem;
+}
+
 .planning-card .plan-copy h3 {
   color: #0a0a0a;
   font-size: 1.875rem;
