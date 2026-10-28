@@ -3180,3 +3180,25 @@ h3,
   margin-top: auto;
   padding-top: 16px;
 }
+
+.hint,
+.request-status,
+.system-caption,
+.workflow-step small,
+.result-card p,
+.result-card ul,
+.glass-note,
+.glass-result > span,
+.glass-result small,
+.bridge-node small,
+.execution-result span,
+.toggle-helper,
+.site-footer > span {
+  font-size: 15px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280;
+  opacity: 1;
+}
