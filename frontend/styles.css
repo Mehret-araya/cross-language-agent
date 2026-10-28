@@ -1946,6 +1946,13 @@ input:disabled {
   }
 }
 
+.planning-card .plan-number {
+  color: #2a2a2a;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
 .workbench-top {
   flex-wrap: wrap;
 }
