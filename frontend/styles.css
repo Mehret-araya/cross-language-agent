@@ -2590,3 +2590,35 @@ label {
     display: none;
   }
 }
+
+.bridge-showcase {
+  min-height: 0;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 32px;
+  padding: 48px;
+}
+
+.bridge-showcase .showcase-copy,
+.bridge-showcase .bridge-glass {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  max-width: none;
+  flex-direction: column;
+  padding: 40px;
+  border: 1px solid rgb(255 255 255 / 72%);
+  border-radius: 28px;
+  background: rgb(255 255 255 / 96%);
+  box-shadow: 0 22px 65px rgb(52 37 73 / 13%);
+}
+
+.bridge-showcase .showcase-copy > .button {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.bridge-showcase .glass-note {
+  margin-top: auto;
+}
