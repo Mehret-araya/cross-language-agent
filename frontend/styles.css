@@ -1981,6 +1981,14 @@ input:disabled {
   font-weight: 500;
 }
 
+.planning-card .checklist-art i {
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 0.875rem;
+}
+
 .workbench-top {
   flex-wrap: wrap;
 }
