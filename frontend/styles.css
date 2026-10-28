@@ -2767,6 +2767,19 @@ label {
     padding: 24px;
   }
 
+  .bridge-showcase .glass-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .bridge-showcase .glass-header > div {
+    width: 100%;
+  }
+
+  .bridge-showcase .glass-header h3 {
+    overflow-wrap: normal;
+  }
+
   .bridge-showcase .showcase-copy h2 {
     font-size: clamp(22px, 7vw, 32px);
   }
