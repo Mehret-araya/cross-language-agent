@@ -1184,7 +1184,7 @@ button:disabled {
   border-radius: 16px;
   background: rgb(255 255 255 / 72%);
   box-shadow: 0 7px 22px rgb(87 63 119 / 12%);
-  font-size: 0.75rem;
+  font-size: 1.0625rem;
   font-weight: 700;
 }
 
@@ -1978,7 +1978,6 @@ input:disabled {
 .planning-card .art-core {
   width: 3.90625rem;
   height: 3.90625rem;
-  font-size: 1rem;
 }
 
 .workbench-top {
