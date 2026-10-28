@@ -1132,10 +1132,10 @@ button:disabled {
 }
 
 .plan-number {
-  color: #73716d;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.13em;
+  color: #2a2a2a;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
 }
 
 .plan-art {
@@ -1797,7 +1797,6 @@ h1 {
 .eyebrow,
 .card-kicker,
 .trust-label,
-.plan-number,
 .glass-kicker {
   color: var(--text-secondary);
   font-size: var(--font-micro);
@@ -1944,13 +1943,6 @@ input:disabled {
   .panel-badge {
     font-size: var(--font-micro);
   }
-}
-
-.planning-card .plan-number {
-  color: #2a2a2a;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
 }
 
 .planning-card {
