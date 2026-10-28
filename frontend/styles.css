@@ -2081,6 +2081,7 @@ input:disabled {
 
 @media (max-width: 48rem) {
   .planning-grid {
+    grid-auto-rows: 1fr;
     grid-template-columns: 1fr;
   }
 }
