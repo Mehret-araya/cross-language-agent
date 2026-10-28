@@ -3061,7 +3061,7 @@ label {
   background: transparent;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 850px) {
   .site-footer {
     display: flex;
     flex-direction: column;
@@ -3150,6 +3150,7 @@ h3,
 
 .systems-grid,
 .planning-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
 }
 
@@ -3179,6 +3180,13 @@ h3,
 .planning-card .plan-copy {
   margin-top: auto;
   padding-top: 16px;
+}
+
+@media (max-width: 767px) {
+  .systems-grid,
+  .planning-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .hint,
