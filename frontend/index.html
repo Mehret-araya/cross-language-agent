@@ -78,64 +78,70 @@
           <form id="analysis-form" novalidate>
             <div class="package-grid">
               <fieldset class="package-card source-card">
-                <legend><span class="package-index">01</span> Source package</legend>
-                <label>
+                <legend class="visually-hidden">Source package</legend>
+                <h3 class="package-card-title">
+                  <span class="package-index">01</span> Source package
+                </h3>
+                <label for="source-name">
                   Package name
-                  <input name="source-name" required maxlength="128"
+                  <input id="source-name" name="source-name" required maxlength="128"
                          placeholder="billing-python" value="billing-python">
                 </label>
                 <div class="field-row">
-                  <label>
+                  <label for="source-language">
                     Language
-                    <input name="source-language" required maxlength="64"
+                    <input id="source-language" name="source-language" required maxlength="64"
                            placeholder="Python" value="Python">
                   </label>
-                  <label>
+                  <label for="source-version">
                     Version
-                    <input name="source-version" maxlength="128"
+                    <input id="source-version" name="source-version" maxlength="128"
                            placeholder="1.0">
                   </label>
                 </div>
-                <label>
+                <label for="source-runtime">
                   Runtime
-                  <input name="source-runtime" maxlength="128"
+                  <input id="source-runtime" name="source-runtime" maxlength="128"
                          placeholder="Python 3.12">
                 </label>
-                <label>
+                <label for="source-exports">
                   Public exports
-                  <textarea name="source-exports" rows="3"
+                  <textarea id="source-exports" name="source-exports" rows="3"
                             placeholder="One export per line">calculate_total</textarea>
                   <span class="hint">Separate names with commas or new lines.</span>
                 </label>
               </fieldset>
 
               <fieldset class="package-card target-card">
-                <legend><span class="package-index">02</span> Target package</legend>
-                <label>
+                <legend class="visually-hidden">Target package</legend>
+                <h3 class="package-card-title">
+                  <span class="package-index">02</span> Target package
+                </h3>
+                <label for="target-name">
                   Package name
-                  <input name="target-name" required maxlength="128"
+                  <input id="target-name" name="target-name" required maxlength="128"
                          placeholder="billing-java" value="billing-java">
                 </label>
                 <div class="field-row">
-                  <label>
+                  <label for="target-language">
                     Language
-                    <input name="target-language" required maxlength="64"
+                    <input id="target-language" name="target-language" required maxlength="64"
                            placeholder="Java" value="Java">
                   </label>
-                  <label>
+                  <label for="target-version">
                     Version
-                    <input name="target-version" maxlength="128"
+                    <input id="target-version" name="target-version" maxlength="128"
                            placeholder="1.0">
                   </label>
                 </div>
-                <label>
+                <label for="target-runtime">
                   Runtime
-                  <input name="target-runtime" maxlength="128"
+                  <input id="target-runtime" name="target-runtime" maxlength="128"
                          placeholder="JVM">
                 </label>
-                <label>
+                <label for="target-exports">
                   Public exports
-                  <textarea name="target-exports" rows="3"
+                  <textarea id="target-exports" name="target-exports" rows="3"
                             placeholder="One export per line">calculateTotal</textarea>
                   <span class="hint">Names are compared as metadata, not signatures.</span>
                 </label>
@@ -145,27 +151,37 @@
             <section class="execution-card" aria-labelledby="execution-title">
               <div class="execution-heading">
                 <div class="execution-title">
-                  <span class="execution-icon" aria-hidden="true">↗</span>
+                  <span class="execution-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <rect x="3.75" y="4.75" width="16.5" height="14.5" rx="2"/>
+                      <path d="m7.5 9 2.5 2.5-2.5 2.5M12.5 14h4"/>
+                    </svg>
+                  </span>
                   <div>
                     <p class="eyebrow">OPTIONAL LIVE CHECK</p>
                     <h3 id="execution-title">Run the Java-to-Python billing example</h3>
                   </div>
                 </div>
-                <label class="toggle-label" for="execute-billing">
-                  <input id="execute-billing" name="execute-billing"
-                         type="checkbox">
-                  Execute after analysis
-                </label>
+                <div class="toggle-control">
+                  <label class="toggle-label" for="execute-billing">
+                    <input id="execute-billing" name="execute-billing"
+                           type="checkbox">
+                    <span>Execute after analysis</span>
+                  </label>
+                  <span class="toggle-helper">
+                    Run the local billing bridge after analysis.
+                  </span>
+                </div>
               </div>
               <div class="field-row billing-fields">
-                <label>
+                <label for="unit-price">
                   Unit price
-                  <input name="unit-price" inputmode="decimal" value="20.00"
+                  <input id="unit-price" name="unit-price" inputmode="decimal" value="20.00"
                          maxlength="32" required disabled>
                 </label>
-                <label>
+                <label for="quantity">
                   Quantity
-                  <input name="quantity" type="number" min="0" step="1"
+                  <input id="quantity" name="quantity" type="number" min="0" step="1"
                          value="3" required disabled>
                 </label>
               </div>

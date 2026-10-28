@@ -32,6 +32,16 @@
   box-sizing: border-box;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 92px;
@@ -435,10 +445,14 @@ h1 {
 }
 
 .package-card legend {
-  width: 100%;
+  margin: 0;
+}
+
+.package-card-title {
+  margin: 0;
   padding: 0 0 15px;
   color: #131313;
-  font-size: 0.8125rem;
+  font-size: 1.375rem;
   font-weight: 670;
   letter-spacing: -0.025em;
 }
@@ -489,14 +503,14 @@ textarea {
   width: 100%;
   min-width: 0;
   padding: 11px 12px;
-  border: 1px solid #e7e6e3;
+  border: 1px solid #d4d4d0;
   border-radius: 11px;
   outline: none;
-  background: rgb(255 255 255 / 88%);
-  color: var(--ink);
-  font-size: 0.75rem;
+  background: #fff;
+  color: #1f1f1f;
+  font-size: 1rem;
   font-weight: 470;
-  transition: border-color 140ms ease, box-shadow 140ms ease, background 140ms ease;
+  transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease;
 }
 
 textarea {
@@ -507,20 +521,31 @@ textarea {
 
 input:focus,
 textarea:focus {
-  border-color: #aaa1c2;
+  border-color: #0a0a0a;
   background: #fff;
-  box-shadow: 0 0 0 3px rgb(166 151 199 / 15%);
+  box-shadow: 0 0 0 2px rgb(10 10 10 / 12%);
 }
 
 input:disabled {
   cursor: not-allowed;
-  background: #f1f0ee;
-  color: #96948f;
+  border-color: #d4d4d0;
+  background: #fff;
+  color: #1f1f1f;
+  opacity: 1;
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: #aaa8a2;
+  color: #595959;
+  opacity: 1;
+}
+
+input:not([type="checkbox"]):focus-visible,
+textarea:focus-visible {
+  border-color: #0a0a0a;
+  outline: 2px solid #0a0a0a;
+  outline-offset: 2px;
+  box-shadow: none;
 }
 
 .hint {
@@ -555,6 +580,15 @@ textarea::placeholder {
   font-size: 1rem;
 }
 
+.execution-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+}
+
 .execution-heading .eyebrow {
   margin-bottom: 4px;
   font-size: 0.75rem;
@@ -570,17 +604,34 @@ textarea::placeholder {
 .toggle-label {
   flex-direction: row;
   align-items: center;
-  gap: 8px;
-  color: #54534f;
-  font-size: 0.75rem;
+  gap: 10px;
+  color: #1f1f1f;
+  font-size: 1rem;
   font-weight: 550;
-  white-space: nowrap;
+}
+
+.toggle-control {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+}
+
+.toggle-helper {
+  color: #4a4a4a;
+  font-size: 0.875rem;
+  line-height: 1.4;
 }
 
 input[type="checkbox"] {
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
   accent-color: #111;
+}
+
+input[type="checkbox"]:focus-visible {
+  outline: 2px solid #0a0a0a;
+  outline-offset: 3px;
 }
 
 .billing-fields {
@@ -1536,7 +1587,12 @@ button:disabled {
   }
 
   .toggle-label {
-    padding-left: 43px;
+    align-items: flex-start;
+  }
+
+  .toggle-control {
+    justify-items: start;
+    padding-left: 1px;
   }
 
   .billing-fields {
@@ -1854,8 +1910,7 @@ h1 {
   color: var(--text-secondary);
 }
 
-label,
-.toggle-label {
+label {
   color: #3c3c3c;
   font-size: var(--font-label);
 }
@@ -1869,10 +1924,6 @@ input::placeholder,
 textarea::placeholder {
   color: #595959;
   opacity: 1;
-}
-
-input:disabled {
-  color: #595959;
 }
 
 .hint,
