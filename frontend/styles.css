@@ -3202,3 +3202,21 @@ textarea::placeholder {
   color: #6b7280;
   opacity: 1;
 }
+
+.analyze-button:disabled {
+  cursor: wait;
+  opacity: 0.88;
+}
+
+.analyze-button[data-state="success"],
+.analyze-button[data-state="error"] {
+  color: #fff;
+}
+
+.request-status[data-state="error"] {
+  color: #8f302a;
+}
+
+.results:not([hidden]) {
+  margin-top: 16px;
+}
