@@ -2335,8 +2335,15 @@ label {
 }
 
 .site-footer {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr) max-content;
   min-height: 104px;
+  align-items: center;
   padding: 24px 0;
+}
+
+.site-footer > span {
+  text-align: left;
 }
 
 .site-footer > a:last-child {
@@ -2415,6 +2422,7 @@ label {
   }
 
   .site-footer {
+    display: flex;
     min-height: 0;
     flex-direction: column;
     align-items: stretch;
