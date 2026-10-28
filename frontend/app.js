@@ -332,7 +332,7 @@ if ("IntersectionObserver" in window) {
     const activeSection = entries
       .filter((entry) => entry.isIntersecting)
       .sort((first, second) =>
-        first.boundingClientRect.top - second.boundingClientRect.top
+        second.boundingClientRect.top - first.boundingClientRect.top
       )[0];
     if (activeSection) {
       setActiveNavigation(activeSection.target.id);
