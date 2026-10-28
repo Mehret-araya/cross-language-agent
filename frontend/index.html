@@ -59,10 +59,16 @@
                  aria-labelledby="workbench-title">
           <div class="panel-glow" aria-hidden="true"></div>
           <div class="workbench-top">
-            <div class="workflow-tabs" aria-label="Analysis workflow">
-              <a class="workflow-tab active" href="#package-input">Package inputs</a>
-              <a class="workflow-tab" href="#workflow">Strategy &amp; plan</a>
-              <a class="workflow-tab" href="#bridge">Runtime example</a>
+            <div class="workflow-tabs" role="tablist" aria-label="Analysis workflow">
+              <a class="workflow-tab active" id="tab-package-input" role="tab"
+                 aria-selected="true" aria-controls="package-input"
+                 href="#package-input">Package inputs</a>
+              <a class="workflow-tab" id="tab-workflow" role="tab"
+                 aria-selected="false" aria-controls="workflow"
+                 href="#workflow">Strategy &amp; plan</a>
+              <a class="workflow-tab" id="tab-bridge" role="tab"
+                 aria-selected="false" aria-controls="bridge"
+                 href="#bridge">Runtime example</a>
             </div>
             <span class="panel-badge"><span class="status-dot"></span> Live API</span>
           </div>

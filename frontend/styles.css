@@ -2255,6 +2255,50 @@ main {
   }
 }
 
+.workflow-tabs {
+  min-height: 44px;
+}
+
+.workflow-tab {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  color: #3a3a3a;
+  font-size: 14px;
+  transition:
+    background-color 150ms ease,
+    box-shadow 150ms ease,
+    color 150ms ease;
+}
+
+.workflow-tab:hover {
+  background: rgb(255 255 255 / 62%);
+  color: #0a0a0a;
+}
+
+.workflow-tab.active,
+.workflow-tab.active:hover {
+  background: #fff;
+  box-shadow: 0 2px 8px rgb(25 24 22 / 12%);
+  color: #0a0a0a;
+}
+
+.workbench-top .panel-badge {
+  min-height: 36px;
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .workflow-tabs {
+    overflow-x: auto;
+  }
+
+  .workflow-tab {
+    flex: 0 0 auto;
+    padding: 8px 11px;
+  }
+}
+
 @media (max-width: 440px) {
   .header-actions .button-small {
     display: none;

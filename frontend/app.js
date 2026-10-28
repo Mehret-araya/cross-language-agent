@@ -8,6 +8,7 @@ const executeBilling = document.querySelector("#execute-billing");
 const menuToggle = document.querySelector("#menu-toggle");
 const siteNav = document.querySelector("#site-nav");
 const navigationLinks = [...siteNav.querySelectorAll('a[href^="#"]')];
+const workflowTabs = [...document.querySelectorAll(".workflow-tab")];
 const billingInputs = form.querySelectorAll(
   '[name="unit-price"], [name="quantity"]',
 );
@@ -320,6 +321,17 @@ function setActiveNavigation(sectionId) {
       link.setAttribute("aria-current", "location");
     } else {
       link.removeAttribute("aria-current");
+    }
+  }
+
+  const activeTab = workflowTabs.find((tab) =>
+    tab.hash === `#${sectionId}`
+  );
+  if (activeTab) {
+    for (const tab of workflowTabs) {
+      const isActive = tab === activeTab;
+      tab.classList.toggle("active", isActive);
+      tab.setAttribute("aria-selected", String(isActive));
     }
   }
 }
