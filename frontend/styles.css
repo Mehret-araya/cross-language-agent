@@ -2500,6 +2500,12 @@ label {
   font-weight: 700;
 }
 
+.workbench-top .panel-badge {
+  min-height: 36px;
+  padding: 0 15px;
+  font-size: 16px;
+}
+
 .site-nav a[aria-current="location"]::after {
   position: absolute;
   right: 12px;
