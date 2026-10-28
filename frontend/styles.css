@@ -1989,6 +1989,12 @@ input:disabled {
   font-size: 0.875rem;
 }
 
+.planning-card .art-core {
+  width: 3.90625rem;
+  height: 3.90625rem;
+  font-size: 1rem;
+}
+
 .workbench-top {
   flex-wrap: wrap;
 }
