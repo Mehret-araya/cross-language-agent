@@ -503,7 +503,7 @@ textarea {
   width: 100%;
   min-width: 0;
   padding: 11px 12px;
-  border: 1px solid #d4d4d0;
+  border: 1px solid #d1d5db;
   border-radius: 11px;
   outline: none;
   background: #fff;
@@ -2151,7 +2151,7 @@ textarea::placeholder {
 }
 
 input:disabled {
-  border: 1px solid #d4d4d0;
+  border: 1px solid #d1d5db;
   background: #fff;
   color: #1f1f1f;
   -webkit-text-fill-color: #1f1f1f;
