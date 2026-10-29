@@ -17,6 +17,9 @@ def test_frontend_and_assets_are_served():
     page = client.get("/")
     script = client.get("/assets/app.js")
     stylesheet = client.get("/assets/styles.css")
+    root_script = client.get("/app.js")
+    root_stylesheet = client.get("/styles.css")
+    root_favicon = client.get("/favicon.svg")
 
     assert page.status_code == 200
     assert "Cross-Language Interoperability Agent" in page.text
@@ -24,6 +27,11 @@ def test_frontend_and_assets_are_served():
     assert "analyze-with-execution" in script.text
     assert stylesheet.status_code == 200
     assert "package-grid" in stylesheet.text
+    assert root_script.status_code == 200
+    assert "analyze-with-execution" in root_script.text
+    assert root_stylesheet.status_code == 200
+    assert "package-grid" in root_stylesheet.text
+    assert root_favicon.status_code == 200
 
 
 def test_analyze_endpoint_returns_workflow_result():

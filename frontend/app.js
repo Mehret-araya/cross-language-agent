@@ -1,3 +1,5 @@
+const API_BASE_URL = "https://cross-language-agents.onrender.com";
+
 const form = document.querySelector("#analysis-form");
 const analyzeButton = document.querySelector("#analyze-button");
 const analyzeLabel = analyzeButton.querySelector("[data-label]");
@@ -64,7 +66,7 @@ function formatErrorDetail(detail) {
 }
 
 async function postJson(path, data) {
-  const response = await fetch(path, {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -250,7 +252,7 @@ function renderAnalysisError(error) {
 
 async function checkHealth() {
   try {
-    const response = await fetch("/health");
+    const response = await fetch(`${API_BASE_URL}/health`);
     if (!response.ok) {
       throw new Error("API unavailable");
     }

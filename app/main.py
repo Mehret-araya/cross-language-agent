@@ -31,3 +31,10 @@ def health_check() -> dict[str, str]:
 @app.get("/", include_in_schema=False)
 def frontend() -> FileResponse:
     return FileResponse(frontend_dir / "index.html")
+
+
+app.mount(
+    "/",
+    StaticFiles(directory=frontend_dir),
+    name="frontend-root-assets",
+)
