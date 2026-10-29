@@ -2,7 +2,13 @@
 from decimal import Decimal, InvalidOperation
 
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    field_validator,
+    model_validator,
+)
 
 from app.models import PackageInfo
 from app.controllers.analysis_controller import (
@@ -64,6 +70,21 @@ class WorkflowRequest(BaseModel):
     source: PackageInfo
     target: PackageInfo
     execute_example: bool = False
+    unit_price: str | None = None
+    quantity: int | None = Field(default=None, strict=True)
+
+    @model_validator(mode="after")
+    def validate_execution_inputs(self) -> "WorkflowRequest":
+        if self.execute_example:
+            if self.unit_price is None or self.quantity is None:
+                raise ValueError(
+                    "Unit price and quantity are required to execute billing."
+                )
+            BillingRequest(
+                unit_price=self.unit_price,
+                quantity=self.quantity,
+            )
+        return self
 
 
 @router.post("/analyze")
@@ -89,6 +110,8 @@ def analyze_with_execution(request: WorkflowRequest) -> dict:
             source=request.source,
             target=request.target,
             execute_example=request.execute_example,
+            unit_price=request.unit_price,
+            quantity=request.quantity,
         )
     except JavaBridgeError as exc:
         _raise_bridge_http_error(exc)

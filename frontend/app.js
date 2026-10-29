@@ -244,36 +244,15 @@ form.addEventListener("submit", async (event) => {
     const analysis = await postJson("/analyze-with-execution", {
       source,
       target,
+      execute_example: executeBilling.checked,
+      unit_price: form.elements.namedItem("unit-price").value.trim(),
+      quantity: Number(form.elements.namedItem("quantity").value),
     });
     renderAnalysis(analysis);
-    requestStatus.textContent = "Analysis complete.";
+    requestStatus.textContent = executeBilling.checked
+      ? "Analysis and billing complete."
+      : "Analysis complete.";
     requestStatus.dataset.state = "ok";
-
-    if (executeBilling.checked) {
-      requestStatus.textContent = "Analysis complete. Running billing…";
-      try {
-        const billing = await postJson("/execute-billing-example", {
-          unit_price: formData.get("unit-price").trim(),
-          quantity: Number(formData.get("quantity")),
-        });
-        renderBillingResult(billing);
-        requestStatus.textContent = "Analysis and billing complete.";
-        requestStatus.dataset.state = "ok";
-      } catch (error) {
-        const card = document.createElement("section");
-        card.className = "result-card wide";
-        const heading = document.createElement("div");
-        heading.className = "result-title";
-        heading.textContent = "Billing execution";
-        const message = document.createElement("p");
-        message.className = "billing-error";
-        message.textContent = error.message;
-        card.append(heading, message);
-        results.append(card);
-        requestStatus.textContent = "Analysis complete; billing could not run.";
-        requestStatus.dataset.state = "error";
-      }
-    }
     analyzeButton.dataset.state =
       requestStatus.dataset.state === "error" ? "error" : "success";
   } catch (error) {

@@ -24,6 +24,8 @@ def run_interoperability_workflow(
     source: PackageInfo,
     target: PackageInfo,
     execute_example: bool = False,
+    unit_price: str | None = None,
+    quantity: int | None = None,
 ) -> dict:
     analysis = analyze_packages(source, target)
     strategy = recommend_strategy(source, target)
@@ -51,9 +53,13 @@ def run_interoperability_workflow(
     }
 
     if execute_example:
+        if unit_price is None or quantity is None:
+            raise ValueError(
+                "Unit price and quantity are required to execute billing."
+            )
         result["execution_example"] = run_java_billing_example(
-            unit_price="20.00",
-            quantity=3,
+            unit_price=unit_price,
+            quantity=quantity,
         )
 
     return result

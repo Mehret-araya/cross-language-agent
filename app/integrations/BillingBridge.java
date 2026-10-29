@@ -30,11 +30,6 @@ public class BillingBridge {
                 StandardCharsets.UTF_8
         ).trim();
 
-        // Use a default request if no input was provided.
-        if (request.isEmpty()) {
-            request = "{\"arguments\":{\"unit_price\":\"12.50\",\"quantity\":4}}";
-        }
-
         try (
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(

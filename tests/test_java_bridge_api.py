@@ -38,7 +38,18 @@ def test_java_bridge_surfaces_worker_errors():
         run_java_billing_example("not-a-price", 3)
 
 
-def test_analyze_with_execution_endpoint():
+@pytest.mark.parametrize(
+    ("unit_price", "quantity", "total"),
+    [
+        ("12.50", 4, "50.00"),
+        ("20.00", 3, "60.00"),
+    ],
+)
+def test_analyze_with_execution_endpoint_uses_requested_billing_values(
+    unit_price,
+    quantity,
+    total,
+):
     response = client.post(
         "/analyze-with-execution",
         json={
@@ -57,6 +68,8 @@ def test_analyze_with_execution_endpoint():
                 "exports": ["calculateTotal"],
             },
             "execute_example": True,
+            "unit_price": unit_price,
+            "quantity": quantity,
         },
     )
 
@@ -67,7 +80,24 @@ def test_analyze_with_execution_endpoint():
     assert "strategy" in data
     assert "adapter_plan" in data
     assert data["execution_example"]["ok"] is True
-    assert data["execution_example"]["result"]["total"] == "60.00"
+    assert data["execution_example"]["result"] == {
+        "unit_price": unit_price,
+        "quantity": quantity,
+        "total": total,
+    }
+
+
+def test_analyze_with_execution_requires_billing_values_when_enabled():
+    response = client.post(
+        "/analyze-with-execution",
+        json={
+            "source": {"name": "billing-python", "language": "Python"},
+            "target": {"name": "billing-java", "language": "Java"},
+            "execute_example": True,
+        },
+    )
+
+    assert response.status_code == 422
 
 
 def test_execute_billing_example_rejects_invalid_price():
@@ -195,6 +225,8 @@ def test_analyze_with_execution_reports_bridge_failures(monkeypatch):
             "source": {"name": "billing-python", "language": "Python"},
             "target": {"name": "billing-java", "language": "Java"},
             "execute_example": True,
+            "unit_price": "12.50",
+            "quantity": 4,
         },
     )
 
