@@ -78,11 +78,32 @@ async function postJson(path, data) {
   return payload;
 }
 
-function createList(items) {
+function createList(items, className = "") {
   const list = document.createElement("ul");
+  if (className) {
+    list.className = className;
+  }
   for (const item of items) {
     const entry = document.createElement("li");
     entry.textContent = item;
+    if (item === "No matching export names found; map the APIs explicitly.") {
+      entry.className = "result-warning";
+    }
+    if (className === "strategy-list") {
+      const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      icon.setAttribute("viewBox", "0 0 16 16");
+      icon.setAttribute("fill", "none");
+      icon.setAttribute("aria-hidden", "true");
+      icon.setAttribute("focusable", "false");
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", "m3.5 8.2 2.8 2.8 6.2-6");
+      path.setAttribute("stroke", "currentColor");
+      path.setAttribute("stroke-linecap", "round");
+      path.setAttribute("stroke-linejoin", "round");
+      path.setAttribute("stroke-width", "1.6");
+      icon.append(path);
+      entry.prepend(icon);
+    }
     list.append(entry);
   }
   return list;
@@ -112,12 +133,30 @@ function renderAnalysis(data) {
   const analysisCard = document.createElement("section");
   analysisCard.className = "result-card";
   analysisCard.append(analysisHeading);
+  const packageSummary = document.createElement("p");
+  packageSummary.className = "package-summary";
+  packageSummary.append(
+    document.createTextNode("Source: "),
+  );
+  const sourceName = document.createElement("strong");
+  sourceName.textContent = data.adapter_plan.source_package;
+  const targetName = document.createElement("strong");
+  targetName.textContent = data.adapter_plan.target_package;
+  packageSummary.append(
+    sourceName,
+    document.createTextNode(" · Target: "),
+    targetName,
+  );
+  analysisCard.append(packageSummary);
   if (data.analysis.risks.length) {
     analysisCard.append(createList(data.analysis.risks));
   }
-  if (data.analysis.evidence.length) {
+  const additionalEvidence = data.analysis.evidence.filter(
+    (item) => !item.startsWith("Source: ") && !item.startsWith("Target: "),
+  );
+  if (additionalEvidence.length) {
     const evidence = document.createElement("p");
-    evidence.textContent = data.analysis.evidence.join(" · ");
+    evidence.textContent = additionalEvidence.join(" · ");
     analysisCard.append(evidence);
   }
   const nextStep = document.createElement("p");
@@ -129,10 +168,11 @@ function renderAnalysis(data) {
   strategyName.textContent = data.strategy.name;
   const strategyReason = document.createElement("p");
   strategyReason.textContent = data.strategy.reason;
+  strategyContent.className = "strategy-content";
   strategyContent.append(
     strategyName,
     strategyReason,
-    createList(data.strategy.next_steps),
+    createList(data.strategy.next_steps, "strategy-list"),
   );
 
   const planContent = document.createElement("div");
